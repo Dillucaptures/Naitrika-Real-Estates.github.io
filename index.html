@@ -3,57 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Naitrika Real Estates</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ================= ROOT ================= */
 :root{
   --bg:#0a0a0a;
-  --text:#fff;
+  --text:#ffffff;
   --glass:rgba(255,255,255,0.06);
-  --glass-border:rgba(255,255,255,0.15);
+  --border:rgba(255,255,255,0.15);
   --gold:#d4af37;
 }
 
+/* LIGHT MODE */
 .light{
   --bg:#f5f5f5;
   --text:#111;
   --glass:rgba(0,0,0,0.05);
-  --glass-border:rgba(0,0,0,0.1);
+  --border:rgba(0,0,0,0.1);
 }
 
+/* ================= BODY ================= */
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:radial-gradient(circle at top,#111,#000);
+  background: radial-gradient(circle at top,#1a1a1a,#000);
   color:var(--text);
-  transition:0.5s;
+  transition:0.4s;
 }
 
-/* NAVBAR */
+/* ================= NAV ================= */
 nav{
-  position:fixed;
-  width:100%;
+  position:sticky;
   top:0;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:15px 30px;
-  backdrop-filter:blur(25px);
+  backdrop-filter:blur(20px);
   background:var(--glass);
-  border-bottom:1px solid var(--glass-border);
-  transition:0.4s;
+  border-bottom:1px solid var(--border);
   z-index:1000;
 }
 
-nav.hide{
-  transform:translateY(-100%);
-}
-
 .logo{
-  font-family:'Playfair Display',serif;
+  font-family:'Playfair Display';
   color:var(--gold);
+  font-size:20px;
 }
 
 nav ul{
@@ -63,33 +63,26 @@ nav ul{
 }
 
 nav a{
-  text-decoration:none;
   color:var(--text);
+  text-decoration:none;
 }
 
-/* TOGGLE SWITCH */
+/* TOGGLE */
 .switch{
-  position:relative;
-  width:50px;
-  height:24px;
+  width:50px;height:24px;position:relative;
 }
 .switch input{display:none;}
 .slider{
-  position:absolute;
-  inset:0;
-  background:#555;
-  border-radius:50px;
+  position:absolute;inset:0;
+  background:#555;border-radius:50px;
   cursor:pointer;
 }
 .slider:before{
   content:"";
   position:absolute;
-  height:18px;
-  width:18px;
-  left:4px;
-  top:3px;
-  background:#fff;
-  border-radius:50%;
+  width:18px;height:18px;
+  top:3px;left:4px;
+  background:white;border-radius:50%;
   transition:0.3s;
 }
 input:checked + .slider{
@@ -99,58 +92,51 @@ input:checked + .slider:before{
   transform:translateX(24px);
 }
 
-/* SECTIONS */
-section{
-  padding:100px 20px;
+/* ================= HERO ================= */
+.hero{
   text-align:center;
+  padding:100px 20px;
 }
-
-/* HERO */
 .hero h1{
-  font-size:64px;
+  font-size:60px;
   color:var(--gold);
 }
 .hero p{
   font-size:22px;
-  opacity:0.8;
 }
 
-/* GLASS */
+/* ================= GLASS ================= */
 .glass{
   background:var(--glass);
-  backdrop-filter:blur(30px);
-  border:1px solid var(--glass-border);
+  backdrop-filter:blur(25px);
+  border:1px solid var(--border);
   border-radius:20px;
-  transition:0.4s;
+  transition:0.3s;
 }
 .glass:hover{
-  transform:translateY(-5px);
+  transform:translateY(-6px);
 }
 
-/* ABOUT */
-.about{
-  max-width:700px;
-  margin:auto;
-  padding:30px;
+/* ================= GALLERY ================= */
+.gallery{
+  padding:40px 20px;
 }
 
-/* SERVICES */
-.services{
-  max-width:800px;
-  margin:auto;
-  padding:30px;
-}
-.services ul{
-  list-style:none;
-  padding:0;
-  line-height:2;
-}
-
-/* GRID */
+/* 5 ROW LAYOUT */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
+  grid-template-rows:repeat(5,auto);
+  grid-auto-flow:column;
+  grid-auto-columns:280px;
+  gap:20px;
+  overflow-x:auto;
+  padding-bottom:10px;
+}
+
+/* CARD */
+.card{
+  cursor:pointer;
+  overflow:hidden;
 }
 
 .card img{
@@ -158,78 +144,53 @@ section{
   height:180px;
   object-fit:cover;
 }
-.info{padding:12px;}
-.dimension{color:var(--gold);}
 
-/* MODAL */
-#modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-.modal-box{
-  position:relative;
-  width:90%;
-  max-width:500px;
-  background:#fff;
-  color:#000;
-  border-radius:15px;
-  overflow:hidden;
-}
-.modal-box img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-}
-.modal-content{padding:15px;}
-.close{
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:#000;
-  color:#fff;
-  border-radius:50%;
-  padding:5px 10px;
-  cursor:pointer;
+/* INFO */
+.info{
+  padding:12px;
+  text-align:left;
 }
 
-/* CONTACT */
-.contact{
-  max-width:400px;
-  margin:auto;
-  padding:25px;
-}
-.contact a{
-  display:block;
-  margin:10px;
+.price{
   color:var(--gold);
+  font-weight:bold;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  .hero h1{font-size:40px;}
-  nav ul{flex-wrap:wrap;}
+/* ================= CONTACT ================= */
+.contact{
+  text-align:center;
+  padding:60px 20px;
 }
+
+.contact a{
+  display:inline-block;
+  margin:10px;
+  padding:12px 18px;
+  border-radius:25px;
+  background:var(--gold);
+  color:#000;
+  text-decoration:none;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .hero h1{font-size:38px;}
+}
+
 </style>
 </head>
 
 <body>
 
 <!-- NAV -->
-<nav id="nav">
+<nav>
   <div class="logo">NAITRIKA</div>
 
   <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#properties">Properties</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Properties</a></li>
+    <li><a href="#">Contact</a></li>
 
-    <!-- TOGGLE AT CONTACT POSITION -->
     <li>
       <label class="switch">
         <input type="checkbox" id="toggle">
@@ -240,152 +201,66 @@ section{
 </nav>
 
 <!-- HERO -->
-<section id="home" class="hero">
+<section class="hero">
   <h1>Naitrika Real Estates</h1>
   <p>From Land To Luxury Living</p>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about glass">
-    Naitrika Real Estates provides premium plots, villas and investment opportunities with high growth potential.
-  </div>
-</section>
+<!-- GALLERY -->
+<section class="gallery">
+  <h2 style="text-align:center;">Our Properties</h2>
 
-<!-- PROPERTIES -->
-<section id="properties">
-  <h2>Properties</h2>
   <div class="grid" id="grid"></div>
 </section>
 
-<!-- SERVICES -->
-<section>
-  <div class="services glass">
-    <ul>
-      <li>✔ All Constructions</li>
-      <li>✔ Interior Works</li>
-      <li>✔ Painting Works</li>
-      <li>✔ Plumbing Works</li>
-      <li>✔ Electrical Works</li>
-      <li>✔ Cupboard Works</li>
-      <li>✔ CCTV Camera Installation</li>
-    </ul>
-  </div>
-</section>
-
 <!-- CONTACT -->
-<section id="contact">
-  <div class="contact glass">
-    <a href="tel:+919999999999">📞 Call</a>
-    <a href="https://wa.me/919999999999">💬 WhatsApp</a>
-  </div>
+<section class="contact">
+  <h2>Contact Us</h2>
+  <a href="tel:+919999999999">📞 Call</a>
+  <a href="https://wa.me/919999999999">💬 WhatsApp</a>
 </section>
-
-<!-- MODAL -->
-<div id="modal">
-  <div class="modal-box" id="modalBox">
-    <span class="close" onclick="closeModal()">✖</span>
-    <img id="modalImg">
-    <div class="modal-content">
-      <h2 id="title"></h2>
-      <p id="size"></p>
-      <p id="desc"></p>
-    </div>
-  </div>
-</div>
 
 <script>
 
-/* DARK DEFAULT */
-document.body.classList.remove("light");
-
-/* TOGGLE */
+/* THEME TOGGLE */
 document.getElementById("toggle").addEventListener("change",()=>{
   document.body.classList.toggle("light");
 });
 
-/* NAV HIDE ON SCROLL */
-let lastScroll=0;
-const nav=document.getElementById("nav");
-
-window.addEventListener("scroll",()=>{
-  let current=window.pageYOffset;
-  if(current > lastScroll){
-    nav.classList.add("hide");
-  }else{
-    nav.classList.remove("hide");
-  }
-  lastScroll=current;
-});
-
-/* YOUR EDITABLE PROPERTY DATA */
+/* PROPERTY DATA (EDIT HERE) */
 const properties = [
-  {img:"images/p1.jpg", size:"1200 sq.ft", desc:"Premium plot"},
-  {img:"images/p2.jpg", size:"1400 sq.ft", desc:"Luxury villa"},
-  {img:"images/p3.jpg", size:"1600 sq.ft", desc:"Modern home"},
-  {img:"images/p4.jpg", size:"1800 sq.ft", desc:"Investment property"},
-  {img:"images/p5.jpg", size:"2000 sq.ft", desc:"Prime location"},
-  {img:"images/p6.jpg", size:"1300 sq.ft", desc:"Affordable plot"},
-  {img:"images/p7.jpg", size:"1700 sq.ft", desc:"Gated community"},
-  {img:"images/p8.jpg", size:"1500 sq.ft", desc:"City center"},
-  {img:"images/p9.jpg", size:"1900 sq.ft", desc:"Luxury build"},
-  {img:"images/p10.jpg", size:"2100 sq.ft", desc:"Villa project"},
-  {img:"images/p11.jpg", size:"1200 sq.ft", desc:"Premium land"},
-  {img:"images/p12.jpg", size:"1400 sq.ft", desc:"Residential plot"},
-  {img:"images/p13.jpg", size:"1600 sq.ft", desc:"Modern layout"},
-  {img:"images/p14.jpg", size:"1800 sq.ft", desc:"High ROI"},
-  {img:"images/p15.jpg", size:"2000 sq.ft", desc:"Luxury estate"},
-  {img:"images/p16.jpg", size:"1300 sq.ft", desc:"Budget option"},
-  {img:"images/p17.jpg", size:"1700 sq.ft", desc:"Green zone"},
-  {img:"images/p18.jpg", size:"1500 sq.ft", desc:"New project"},
-  {img:"images/p19.jpg", size:"1900 sq.ft", desc:"Corner plot"},
-  {img:"images/p20.jpg", size:"2200 sq.ft", desc:"Premium villa"}
+  {img:"images/p1.jpg", title:"Premium Plot", size:"1200 sq.ft", price:"₹25 Lakhs", loc:"Hyderabad"},
+  {img:"images/p2.jpg", title:"Luxury Villa", size:"2000 sq.ft", price:"₹80 Lakhs", loc:"Bangalore"},
+  {img:"images/p3.jpg", title:"Modern House", size:"1500 sq.ft", price:"₹50 Lakhs", loc:"Chennai"},
+  {img:"images/p4.jpg", title:"Gated Community", size:"1800 sq.ft", price:"₹65 Lakhs", loc:"Vizag"},
+  {img:"images/p5.jpg", title:"Farm Land", size:"3000 sq.ft", price:"₹20 Lakhs", loc:"Vijayawada"},
+
+  /* duplicate for demo (add unlimited) */
+  {img:"images/p6.jpg", title:"Plot", size:"1300 sq.ft", price:"₹30 Lakhs", loc:"City"},
+  {img:"images/p7.jpg", title:"Villa", size:"2100 sq.ft", price:"₹90 Lakhs", loc:"City"},
+  {img:"images/p8.jpg", title:"House", size:"1600 sq.ft", price:"₹55 Lakhs", loc:"City"},
+  {img:"images/p9.jpg", title:"Project", size:"1700 sq.ft", price:"₹60 Lakhs", loc:"City"},
+  {img:"images/p10.jpg", title:"Estate", size:"2500 sq.ft", price:"₹1 Cr", loc:"City"}
 ];
 
+/* RENDER */
 const grid=document.getElementById("grid");
 
-properties.forEach((p,i)=>{
+properties.forEach(p=>{
   const card=document.createElement("div");
-  card.className="glass";
+  card.className="card glass";
 
   card.innerHTML=`
     <img src="${p.img}">
     <div class="info">
-      <div class="dimension">${p.size}</div>
-      <div>${p.desc}</div>
+      <div class="price">${p.price}</div>
+      <div><b>${p.title}</b></div>
+      <div>${p.size}</div>
+      <div>${p.loc}</div>
     </div>
   `;
 
-  card.onclick=()=>openModal(p,i+1);
   grid.appendChild(card);
-});
-
-function openModal(p,id){
-  modal.style.display="flex";
-  modalImg.src=p.img;
-  title.innerText="Property #"+id;
-  size.innerText=p.size;
-  desc.innerText=p.desc;
-}
-
-function closeModal(){
-  modal.style.display="none";
-}
-
-/* CLICK OUTSIDE CLOSE */
-modal.addEventListener("click",(e)=>{
-  if(e.target===modal) closeModal();
-});
-
-/* SWIPE CLOSE */
-let startY=0;
-modalBox.addEventListener("touchstart",e=>{
-  startY=e.touches[0].clientY;
-});
-modalBox.addEventListener("touchmove",e=>{
-  if(e.touches[0].clientY - startY > 100){
-    closeModal();
-  }
 });
 
 </script>
