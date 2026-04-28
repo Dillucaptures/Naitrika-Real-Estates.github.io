@@ -8,24 +8,55 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{background:#0a0a0a;color:#fff}
-nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 30px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px)}
+
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 30px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);z-index:1000}
 nav a{color:#fff;text-decoration:none;margin:0 10px}
 section{padding:100px 30px}
+
 .hero{height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover}
 
 .gallery{column-count:4;column-gap:15px}
 @media(max-width:1000px){.gallery{column-count:2}}
 @media(max-width:600px){.gallery{column-count:1}}
 
-.g-box{break-inside:avoid;margin-bottom:15px;position:relative}
-.g-box img{width:100%;border-radius:12px}
-.g-info{position:absolute;bottom:0;width:100%;padding:10px;background:linear-gradient(transparent,rgba(0,0,0,0.8));opacity:0;transition:.3s}
-.g-box:hover .g-info{opacity:1}
+.g-box{break-inside:avoid;margin-bottom:15px;cursor:pointer}
+.g-box img{width:100%;border-radius:12px;transition:.3s}
+.g-box img:hover{transform:scale(1.03)}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center}
-.modal img{max-width:90%;border-radius:10px}
-.modal button{margin:10px;padding:10px}
+/* POPUP MODAL */
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.9);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+.modal-content{
+position:relative;
+max-width:90%;
+max-height:90%;
+}
+.modal img{
+width:100%;
+height:auto;
+border-radius:12px;
+}
+.close-btn{
+position:absolute;
+top:-40px;
+right:0;
+background:#fff;
+color:#000;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
 
+footer{text-align:center;padding:30px;background:#000}
 </style>
 </head>
 <body>
@@ -47,28 +78,17 @@ section{padding:100px 30px}
 <h2>Gallery</h2>
 <div class="gallery">
 
-<!-- MANUAL IMAGE BLOCK (EDIT HERE) -->
-<div class="g-box">
+<!-- IMAGE BLOCK -->
+<div class="g-box" onclick="openModal(this)">
 <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200">
-<div class="g-info">
-<h4>Villa 1</h4>
-<p>₹2.5 Cr • 3200 sq.ft</p>
-<button onclick="openModal(this)">View</button>
-</div>
 </div>
 
-<div class="g-box">
-  <img src="YOUR_IMAGE_URL">
-  <div class="g-info">
-    <h4>Property Name</h4>
-    <p>₹ Price • sq.ft</p>
-    <button onclick="openModal(this)">View</button>
-  </div>
+<div class="g-box" onclick="openModal(this)">
+<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200">
 </div>
 
-<div class="g-box">
+<div class="g-box" onclick="openModal(this)">
 <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200">
-<div class="g-info"><h4>House</h4><p>₹3 Cr • 4000 sq.ft</p><button onclick="openModal(this)">View</button></div>
 </div>
 
 <!-- COPY ABOVE BLOCK TO ADD MORE IMAGES -->
@@ -82,25 +102,36 @@ section{padding:100px 30px}
 <button onclick="contactWhatsApp()">WhatsApp</button>
 </section>
 
+<!-- POPUP -->
 <div class="modal" id="modal">
-<div>
+<div class="modal-content">
+<button class="close-btn" onclick="closeModal()">Close ✕</button>
 <img id="modalImg">
-<br>
-<button onclick="closeModal()">Close</button>
 </div>
 </div>
+
+<footer>© 2026 Naitrika Real Estates</footer>
 
 <script>
 let phone="+919999999999";
 
-function openModal(btn){
-let box=btn.closest('.g-box');
-modal.style.display='flex';
-modalImg.src=box.querySelector('img').src;
+function openModal(el){
+let img=el.querySelector('img').src;
+document.getElementById('modal').style.display='flex';
+document.getElementById('modalImg').src=img;
 }
-function closeModal(){modal.style.display='none'}
+
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
+
 function callNow(){window.location.href=`tel:${phone}`}
 function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
+
+// close on background click
+document.getElementById('modal').addEventListener('click',function(e){
+if(e.target===this){closeModal();}
+});
 </script>
 
 </body>
