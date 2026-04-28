@@ -19,42 +19,25 @@ section{padding:100px 30px}
 @media(max-width:1000px){.gallery{column-count:2}}
 @media(max-width:600px){.gallery{column-count:1}}
 
-.g-box{break-inside:avoid;margin-bottom:15px;cursor:pointer}
-.g-box img{width:100%;border-radius:12px;transition:.3s}
-.g-box img:hover{transform:scale(1.03)}
-
-/* POPUP MODAL */
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.9);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:2000;
-}
-.modal-content{
-position:relative;
-max-width:90%;
-max-height:90%;
-}
-.modal img{
-width:100%;
-height:auto;
-border-radius:12px;
-}
-.close-btn{
+.g-box{break-inside:avoid;margin-bottom:15px;cursor:pointer;position:relative}
+.g-box img{width:100%;border-radius:12px}
+.g-desc{
 position:absolute;
-top:-40px;
+bottom:0;
+left:0;
 right:0;
-background:#fff;
-color:#000;
-border:none;
-padding:8px 12px;
-border-radius:8px;
-cursor:pointer;
-font-weight:600;
+padding:10px;
+background:linear-gradient(transparent,rgba(0,0,0,0.8));
+font-size:13px;
 }
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:2000}
+.modal-content{position:relative;max-width:90%;max-height:90%;text-align:center}
+.modal img{width:100%;border-radius:12px}
+.modal h3{margin-top:10px}
+.modal p{color:#ccc;margin-top:5px}
+.close-btn{position:absolute;top:-40px;right:0;background:#fff;color:#000;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
 
 footer{text-align:center;padding:30px;background:#000}
 </style>
@@ -78,20 +61,32 @@ footer{text-align:center;padding:30px;background:#000}
 <h2>Gallery</h2>
 <div class="gallery">
 
-<!-- IMAGE BLOCK -->
+<!-- PROPERTY ITEM -->
 <div class="g-box" onclick="openModal(this)">
 <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200">
+<div class="g-desc">
+<strong>Luxury Villa</strong><br>
+₹2.5 Cr • 4 BHK • 3200 sq.ft
+</div>
 </div>
 
 <div class="g-box" onclick="openModal(this)">
 <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200">
+<div class="g-desc">
+<strong>Modern Apartment</strong><br>
+₹1.2 Cr • 3 BHK • 1800 sq.ft
+</div>
 </div>
 
 <div class="g-box" onclick="openModal(this)">
 <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200">
+<div class="g-desc">
+<strong>Beach House</strong><br>
+₹3 Cr • 5 BHK • 4000 sq.ft
+</div>
 </div>
 
-<!-- COPY ABOVE BLOCK TO ADD MORE IMAGES -->
+<!-- COPY ABOVE BLOCK TO ADD MORE -->
 
 </div>
 </section>
@@ -102,11 +97,12 @@ footer{text-align:center;padding:30px;background:#000}
 <button onclick="contactWhatsApp()">WhatsApp</button>
 </section>
 
-<!-- POPUP -->
 <div class="modal" id="modal">
 <div class="modal-content">
 <button class="close-btn" onclick="closeModal()">Close ✕</button>
 <img id="modalImg">
+<h3 id="modalTitle"></h3>
+<p id="modalDesc"></p>
 </div>
 </div>
 
@@ -117,21 +113,20 @@ let phone="+919999999999";
 
 function openModal(el){
 let img=el.querySelector('img').src;
+let title=el.querySelector('strong').innerText;
+let desc=el.querySelector('.g-desc').innerText;
+
 document.getElementById('modal').style.display='flex';
 document.getElementById('modalImg').src=img;
+document.getElementById('modalTitle').innerText=title;
+document.getElementById('modalDesc').innerText=desc;
 }
 
-function closeModal(){
-document.getElementById('modal').style.display='none';
-}
-
+function closeModal(){document.getElementById('modal').style.display='none'}
 function callNow(){window.location.href=`tel:${phone}`}
 function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
 
-// close on background click
-document.getElementById('modal').addEventListener('click',function(e){
-if(e.target===this){closeModal();}
-});
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 </script>
 
 </body>
