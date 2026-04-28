@@ -12,63 +12,37 @@
   --bg:#0a0a0a;
   --text:#fff;
   --glass:rgba(255,255,255,0.06);
-  --glass-strong:rgba(255,255,255,0.12);
+  --glass-border:rgba(255,255,255,0.15);
   --gold:#d4af37;
 }
 
-/* LIGHT MODE */
 .light{
   --bg:#f5f5f5;
   --text:#111;
   --glass:rgba(0,0,0,0.05);
-  --glass-strong:rgba(0,0,0,0.1);
+  --glass-border:rgba(0,0,0,0.1);
 }
 
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:var(--bg);
+  background:radial-gradient(circle at top,#111,#000);
   color:var(--text);
-  transition:0.4s;
+  transition:0.5s;
 }
 
-/* INTRO */
-#intro{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  animation:fadeOut 0.8s ease 1.3s forwards;
-}
-#intro h1{
-  font-family:'Playfair Display',serif;
-  font-size:42px;
-  background:linear-gradient(90deg,#d4af37,#fff,#d4af37);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shine 1.5s linear infinite;
-}
-@keyframes shine{
-  0%{background-position:-200%;}
-  100%{background-position:200%;}
-}
-@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
-
-/* NAV */
+/* NAVBAR */
 nav{
+  position:fixed;
+  width:100%;
+  top:0;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:15px 30px;
-  backdrop-filter:blur(30px);
+  backdrop-filter:blur(25px);
   background:var(--glass);
-  border-bottom:1px solid var(--glass-strong);
-  position:fixed;
-  width:100%;
-  top:0;
+  border-bottom:1px solid var(--glass-border);
   transition:0.4s;
   z-index:1000;
 }
@@ -82,39 +56,24 @@ nav.hide{
   color:var(--gold);
 }
 
-.nav-left{
+nav ul{
   display:flex;
   gap:20px;
+  list-style:none;
 }
 
 nav a{
   text-decoration:none;
   color:var(--text);
-  position:relative;
 }
 
-nav a::after{
-  content:"";
-  position:absolute;
-  bottom:-3px;
-  left:0;
-  width:0%;
-  height:2px;
-  background:var(--gold);
-  transition:0.3s;
-}
-nav a:hover::after{
-  width:100%;
-}
-
-/* SWITCH */
+/* TOGGLE SWITCH */
 .switch{
+  position:relative;
   width:50px;
   height:24px;
-  position:relative;
 }
 .switch input{display:none;}
-
 .slider{
   position:absolute;
   inset:0;
@@ -125,15 +84,14 @@ nav a:hover::after{
 .slider:before{
   content:"";
   position:absolute;
-  width:18px;
   height:18px;
-  top:3px;
+  width:18px;
   left:4px;
+  top:3px;
   background:#fff;
   border-radius:50%;
   transition:0.3s;
 }
-
 input:checked + .slider{
   background:var(--gold);
 }
@@ -143,7 +101,7 @@ input:checked + .slider:before{
 
 /* SECTIONS */
 section{
-  padding:90px 20px;
+  padding:100px 20px;
   text-align:center;
 }
 
@@ -154,19 +112,38 @@ section{
 }
 .hero p{
   font-size:22px;
+  opacity:0.8;
 }
 
 /* GLASS */
 .glass{
   background:var(--glass);
-  backdrop-filter:blur(40px);
-  border:1px solid var(--glass-strong);
+  backdrop-filter:blur(30px);
+  border:1px solid var(--glass-border);
   border-radius:20px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.5);
   transition:0.4s;
 }
 .glass:hover{
-  transform:translateY(-6px) scale(1.01);
+  transform:translateY(-5px);
+}
+
+/* ABOUT */
+.about{
+  max-width:700px;
+  margin:auto;
+  padding:30px;
+}
+
+/* SERVICES */
+.services{
+  max-width:800px;
+  margin:auto;
+  padding:30px;
+}
+.services ul{
+  list-style:none;
+  padding:0;
+  line-height:2;
 }
 
 /* GRID */
@@ -178,14 +155,9 @@ section{
 
 .card img{
   width:100%;
-  height:200px;
+  height:180px;
   object-fit:cover;
-  transition:0.4s;
 }
-.card:hover img{
-  transform:scale(1.1);
-}
-
 .info{padding:12px;}
 .dimension{color:var(--gold);}
 
@@ -193,60 +165,45 @@ section{
 #modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,0.8);
   display:none;
   justify-content:center;
   align-items:center;
   z-index:9999;
 }
-
 .modal-box{
   position:relative;
-  background:#fff;
-  color:#000;
   width:90%;
   max-width:500px;
-  border-radius:20px;
+  background:#fff;
+  color:#000;
+  border-radius:15px;
   overflow:hidden;
-  animation:zoom 0.3s ease;
 }
-
-@keyframes zoom{
-  from{transform:scale(0.8);}
-  to{transform:scale(1);}
-}
-
 .modal-box img{
   width:100%;
-  height:240px;
+  height:220px;
   object-fit:cover;
 }
-
 .modal-content{padding:15px;}
-
 .close{
   position:absolute;
   top:10px;
   right:10px;
   background:#000;
   color:#fff;
-  width:35px;
-  height:35px;
   border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  padding:5px 10px;
   cursor:pointer;
 }
 
 /* CONTACT */
-.contact-box{
+.contact{
   max-width:400px;
   margin:auto;
   padding:25px;
 }
-
-.contact-box a{
+.contact a{
   display:block;
   margin:10px;
   color:var(--gold);
@@ -255,65 +212,70 @@ section{
 /* MOBILE */
 @media(max-width:768px){
   .hero h1{font-size:40px;}
+  nav ul{flex-wrap:wrap;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="intro">
-  <h1>Naitrika Real Estates</h1>
-</div>
-
-<nav id="navbar">
+<!-- NAV -->
+<nav id="nav">
   <div class="logo">NAITRIKA</div>
 
-  <div class="nav-left">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#properties">Properties</a>
-    <a href="#contact">Contact</a>
-  </div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#contact">Contact</a></li>
 
-  <label class="switch">
-    <input type="checkbox" id="themeToggle">
-    <span class="slider"></span>
-  </label>
+    <!-- TOGGLE AT CONTACT POSITION -->
+    <li>
+      <label class="switch">
+        <input type="checkbox" id="toggle">
+        <span class="slider"></span>
+      </label>
+    </li>
+  </ul>
 </nav>
 
+<!-- HERO -->
 <section id="home" class="hero">
   <h1>Naitrika Real Estates</h1>
   <p>From Land To Luxury Living</p>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
-  <h2>About</h2>
-  <div class="glass" style="max-width:700px;margin:auto;padding:30px;">
-    Premium plots, villas and high-growth investment properties.
+  <div class="about glass">
+    Naitrika Real Estates provides premium plots, villas and investment opportunities with high growth potential.
   </div>
 </section>
 
+<!-- PROPERTIES -->
 <section id="properties">
   <h2>Properties</h2>
   <div class="grid" id="grid"></div>
 </section>
 
+<!-- SERVICES -->
 <section>
-  <h2>Services</h2>
-  <div class="glass" style="max-width:800px;margin:auto;padding:30px;">
-    ✔ All Constructions<br>
-    ✔ Interior Works<br>
-    ✔ Painting<br>
-    ✔ Plumbing<br>
-    ✔ Electrical Works<br>
-    ✔ Cupboard Works<br>
-    ✔ CCTV Installation
+  <div class="services glass">
+    <ul>
+      <li>✔ All Constructions</li>
+      <li>✔ Interior Works</li>
+      <li>✔ Painting Works</li>
+      <li>✔ Plumbing Works</li>
+      <li>✔ Electrical Works</li>
+      <li>✔ Cupboard Works</li>
+      <li>✔ CCTV Camera Installation</li>
+    </ul>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-  <h2>Contact</h2>
-  <div class="contact-box glass">
+  <div class="contact glass">
     <a href="tel:+919999999999">📞 Call</a>
     <a href="https://wa.me/919999999999">💬 WhatsApp</a>
   </div>
@@ -321,8 +283,8 @@ section{
 
 <!-- MODAL -->
 <div id="modal">
-  <div class="modal-box">
-    <div class="close" onclick="closeModal()">✖</div>
+  <div class="modal-box" id="modalBox">
+    <span class="close" onclick="closeModal()">✖</span>
     <img id="modalImg">
     <div class="modal-content">
       <h2 id="title"></h2>
@@ -333,18 +295,22 @@ section{
 </div>
 
 <script>
-/* THEME */
-document.getElementById("themeToggle").addEventListener("change",()=>{
+
+/* DARK DEFAULT */
+document.body.classList.remove("light");
+
+/* TOGGLE */
+document.getElementById("toggle").addEventListener("change",()=>{
   document.body.classList.toggle("light");
 });
 
 /* NAV HIDE ON SCROLL */
 let lastScroll=0;
-const nav=document.getElementById("navbar");
+const nav=document.getElementById("nav");
 
 window.addEventListener("scroll",()=>{
   let current=window.pageYOffset;
-  if(current>lastScroll){
+  if(current > lastScroll){
     nav.classList.add("hide");
   }else{
     nav.classList.remove("hide");
@@ -352,18 +318,35 @@ window.addEventListener("scroll",()=>{
   lastScroll=current;
 });
 
-/* PROPERTIES */
-const properties = Array.from({length:20}, (_,i)=>({
-  img:`https://picsum.photos/500/300?random=${i+1}`,
-  size:`${1200+i*50} sq.ft`,
-  desc:`Premium property ${i+1}`
-}));
+/* YOUR EDITABLE PROPERTY DATA */
+const properties = [
+  {img:"images/p1.jpg", size:"1200 sq.ft", desc:"Premium plot"},
+  {img:"images/p2.jpg", size:"1400 sq.ft", desc:"Luxury villa"},
+  {img:"images/p3.jpg", size:"1600 sq.ft", desc:"Modern home"},
+  {img:"images/p4.jpg", size:"1800 sq.ft", desc:"Investment property"},
+  {img:"images/p5.jpg", size:"2000 sq.ft", desc:"Prime location"},
+  {img:"images/p6.jpg", size:"1300 sq.ft", desc:"Affordable plot"},
+  {img:"images/p7.jpg", size:"1700 sq.ft", desc:"Gated community"},
+  {img:"images/p8.jpg", size:"1500 sq.ft", desc:"City center"},
+  {img:"images/p9.jpg", size:"1900 sq.ft", desc:"Luxury build"},
+  {img:"images/p10.jpg", size:"2100 sq.ft", desc:"Villa project"},
+  {img:"images/p11.jpg", size:"1200 sq.ft", desc:"Premium land"},
+  {img:"images/p12.jpg", size:"1400 sq.ft", desc:"Residential plot"},
+  {img:"images/p13.jpg", size:"1600 sq.ft", desc:"Modern layout"},
+  {img:"images/p14.jpg", size:"1800 sq.ft", desc:"High ROI"},
+  {img:"images/p15.jpg", size:"2000 sq.ft", desc:"Luxury estate"},
+  {img:"images/p16.jpg", size:"1300 sq.ft", desc:"Budget option"},
+  {img:"images/p17.jpg", size:"1700 sq.ft", desc:"Green zone"},
+  {img:"images/p18.jpg", size:"1500 sq.ft", desc:"New project"},
+  {img:"images/p19.jpg", size:"1900 sq.ft", desc:"Corner plot"},
+  {img:"images/p20.jpg", size:"2200 sq.ft", desc:"Premium villa"}
+];
 
 const grid=document.getElementById("grid");
 
 properties.forEach((p,i)=>{
   const card=document.createElement("div");
-  card.className="glass card";
+  card.className="glass";
 
   card.innerHTML=`
     <img src="${p.img}">
@@ -389,10 +372,22 @@ function closeModal(){
   modal.style.display="none";
 }
 
-/* OUTSIDE CLICK */
+/* CLICK OUTSIDE CLOSE */
 modal.addEventListener("click",(e)=>{
   if(e.target===modal) closeModal();
 });
+
+/* SWIPE CLOSE */
+let startY=0;
+modalBox.addEventListener("touchstart",e=>{
+  startY=e.touches[0].clientY;
+});
+modalBox.addEventListener("touchmove",e=>{
+  if(e.touches[0].clientY - startY > 100){
+    closeModal();
+  }
+});
+
 </script>
 
 </body>
