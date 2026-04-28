@@ -10,289 +10,167 @@
 html{scroll-behavior:smooth}
 body{background:#0a0a0a;color:#fff;overflow-x:hidden}
 
-/* ===== NAV ===== */
-nav{
-position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;
-padding:14px 36px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,0.1);z-index:1000
-}
-nav h1{font-weight:600;letter-spacing:.5px}
+/* NAV */
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 36px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1);z-index:1000}
 nav ul{display:flex;gap:28px;list-style:none}
-nav a{color:#fff;text-decoration:none;font-size:14px;letter-spacing:.5px;position:relative;padding:6px 2px}
-nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:#fff;transition:.3s}
+nav a{color:#fff;text-decoration:none;position:relative}
+nav a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#fff;transition:.3s}
 nav a:hover::after, nav a.active::after{width:100%}
-nav a.active{opacity:1}
-nav a{opacity:.85}
-
-/* offset for fixed nav */
 section{padding:110px 40px}
 #home{padding-top:0}
 
-/* ===== HERO ===== */
-.hero{
-height:100vh;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover;
-display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column
-}
-.hero h2{font-size:48px;background:rgba(0,0,0,0.4);padding:20px 40px;border-radius:20px}
-.hero p{margin-top:10px;font-size:20px;color:#ccc}
+.hero{height:100vh;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column}
+.hero h2{font-size:48px;background:rgba(0,0,0,0.4);padding:20px;border-radius:20px}
+.hero p{margin-top:10px;color:#ccc}
 
-/* ===== GRID ===== */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
-.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;transition:.35s}
-.card:hover{transform:translateY(-8px)}
-.card img{width:100%;height:200px;object-fit:cover;filter:brightness(0.95)}
-.card .content{padding:18px}
-.card button{margin-top:10px;padding:10px 14px;border:none;border-radius:10px;background:#fff;color:#000;cursor:pointer;font-weight:600}
+/* GALLERY V2 */
+.filters{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.filters button{padding:8px 14px;border:none;border-radius:20px;background:#222;color:#fff;cursor:pointer}
+.filters button.active{background:#fff;color:#000}
 
-/* ===== GALLERY (MANUAL) ===== */
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.g-item{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);backdrop-filter:blur(14px)}
-.g-item img{width:100%;height:180px;object-fit:cover;display:block}
-.g-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;background:linear-gradient(transparent, rgba(0,0,0,.65));opacity:0;transition:.25s}
-.g-item:hover .g-overlay{opacity:1}
-.g-overlay h4{font-size:14px}
-.g-overlay p{font-size:12px;color:#ddd}
-.g-overlay .actions{display:flex;gap:8px;margin-top:8px}
-.g-overlay button{flex:1;padding:8px;border:none;border-radius:8px;font-size:12px;cursor:pointer}
-.g-overlay .view{background:#fff;color:#000}
-.g-overlay .wa{background:#25D366;color:#fff}
-.g-overlay .call{background:#007BFF;color:#fff}
+.gallery{column-count:4;column-gap:15px}
+@media(max-width:1000px){.gallery{column-count:2}}
+@media(max-width:600px){.gallery{column-count:1}}
 
-/* ===== MODAL ===== */
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:2000}
-.modal-content{background:rgba(255,255,255,0.1);backdrop-filter:blur(20px);padding:18px;border-radius:20px;max-width:640px;width:92%;text-align:center}
-.modal img{width:100%;border-radius:12px}
-.modal button{margin:10px 6px;padding:10px 18px;border:none;border-radius:10px;cursor:pointer}
-.close{background:#e53935;color:#fff}
-.whatsapp{background:#25D366;color:#fff}
+.g-box{break-inside:avoid;margin-bottom:15px;position:relative;border-radius:15px;overflow:hidden}
+.g-box img{width:100%;display:block;border-radius:15px}
+.g-info{position:absolute;bottom:0;left:0;right:0;padding:15px;background:linear-gradient(transparent,rgba(0,0,0,0.8));opacity:0;transition:.3s}
+.g-box:hover .g-info{opacity:1}
+.g-actions{margin-top:8px;display:flex;gap:8px}
+.g-actions button{flex:1;padding:8px;border:none;border-radius:8px;cursor:pointer}
+.view{background:#fff;color:#000}
+.wa{background:#25D366;color:#fff}
 .call{background:#007BFF;color:#fff}
 
-/* ===== CONTACT ===== */
-.contact-buttons{margin-top:20px}
-.contact-buttons button{margin:10px;padding:12px 25px;border:none;border-radius:10px;font-size:16px;cursor:pointer}
+/* MODAL SLIDER */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:2000}
+.modal-content{width:90%;max-width:800px;text-align:center}
+.slider{position:relative}
+.slider img{width:100%;border-radius:12px}
+.nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:#0008;color:#fff;border:none;padding:10px;border-radius:50%;cursor:pointer}
+.prev{left:10px}
+.next{right:10px}
+.thumbs{display:flex;gap:6px;margin-top:10px;overflow:auto}
+.thumbs img{width:70px;height:50px;object-fit:cover;border-radius:6px;opacity:.6;cursor:pointer}
+.thumbs img.active{opacity:1;border:2px solid #fff}
+.modal button{margin:10px;padding:10px 15px;border:none;border-radius:10px;cursor:pointer}
 
-/* ===== FOOTER ===== */
-footer{text-align:center;padding:36px;background:#000;color:#aaa}
-
-/* ===== ANIM ===== */
-.fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
-.fade.show{opacity:1;transform:translateY(0)}
-
-/* mobile */
-@media (max-width:640px){
- nav{padding:12px 18px}
- nav ul{gap:16px}
- .hero h2{font-size:32px}
-}
+footer{text-align:center;padding:30px;background:#000}
 </style>
 </head>
 <body>
 
 <nav>
-  <h1>Naitrika Real Estates</h1>
-  <ul>
-    <li><a href="#home" class="nav-link active">HOME</a></li>
-    <li><a href="#about" class="nav-link">ABOUT</a></li>
-    <li><a href="#properties" class="nav-link">PROPERTIES</a></li>
-    <li><a href="#gallery" class="nav-link">GALLERY</a></li>
-    <li><a href="#contact" class="nav-link">CONTACT</a></li>
-  </ul>
+<h1>Naitrika Real Estates</h1>
+<ul>
+<li><a href="#home">HOME</a></li>
+<li><a href="#gallery">GALLERY</a></li>
+<li><a href="#contact">CONTACT</a></li>
+</ul>
 </nav>
 
-<section id="home" class="hero fade">
-  <h2>Find Your Dream Property</h2>
-  <p>From Land To Luxury Living</p>
+<section id="home" class="hero">
+<h2>Luxury Living</h2>
+<p>From Land To Luxury Living</p>
 </section>
 
-<section id="about" class="fade">
-  <h2>About Us</h2>
-  <p>We deliver premium real estate experiences with luxury properties, modern architecture, and trusted service.</p>
+<section id="gallery">
+<h2>Premium Gallery</h2>
+
+<div class="filters">
+<button class="active" onclick="filterGallery('all',this)">All</button>
+<button onclick="filterGallery('villa',this)">Villa</button>
+<button onclick="filterGallery('apartment',this)">Apartment</button>
+</div>
+
+<div class="gallery" id="galleryWrap"></div>
 </section>
 
-<section id="properties" class="fade">
-  <h2>Properties</h2>
-  <div class="grid" id="grid"></div>
-</section>
-
-<!-- ===== MANUAL GALLERY (20+ ITEMS) ===== -->
-<section id="gallery" class="fade">
-  <h2>Gallery</h2>
-  <div class="gallery-grid">
-
-    <!-- COPY THIS BLOCK TO ADD MORE IMAGES -->
-    <!-- ITEM 1 -->
-    <div class="g-item">
-      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200" loading="lazy" alt="Property 1">
-      <div class="g-overlay">
-        <h4>Villa A</h4>
-        <p>₹2.5 Cr • 4 BHK • 3200 sq.ft</p>
-        <div class="actions">
-          <button class="view" onclick="openModalFromGallery(this)">View</button>
-          <button class="wa" onclick="contactWhatsApp()">WA</button>
-          <button class="call" onclick="callNow()">Call</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ITEM 2 -->
-    <div class="g-item">
-      <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200" loading="lazy" alt="Property 2">
-      <div class="g-overlay">
-        <h4>Apartment B</h4>
-        <p>₹1.2 Cr • 3 BHK • 1800 sq.ft</p>
-        <div class="actions">
-          <button class="view" onclick="openModalFromGallery(this)">View</button>
-          <button class="wa" onclick="contactWhatsApp()">WA</button>
-          <button class="call" onclick="callNow()">Call</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ITEM 3 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Beach House</h4><p>₹3.1 Cr • 5 BHK • 4000 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 4 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Urban Flat</h4><p>₹90L • 2 BHK • 1200 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 5 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Penthouse</h4><p>₹4 Cr • 4 BHK • 3500 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 6 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Classic Home</h4><p>₹1.8 Cr • 3 BHK • 2100 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 7 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Mansion</h4><p>₹8 Cr • 6 BHK • 6000 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 8 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>City Apt</h4><p>₹75L • 2 BHK • 1100 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 9 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Studio</h4><p>₹45L • 1 BHK • 700 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 10 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Garden Villa</h4><p>₹2.9 Cr • 4 BHK • 3000 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 11 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Duplex</h4><p>₹2.2 Cr • 4 BHK • 2800 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 12 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Farm House</h4><p>₹3.5 Cr • 5 BHK • 5000 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 13 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Condo</h4><p>₹1.5 Cr • 3 BHK • 1900 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 14 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Loft</h4><p>₹1.1 Cr • 2 BHK • 1400 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 15 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1599423300746-b62533397364?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Townhouse</h4><p>₹1.7 Cr • 3 BHK • 2200 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 16 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Villa Pro</h4><p>₹3.2 Cr • 4 BHK • 3600 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 17 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Smart Home</h4><p>₹2 Cr • 3 BHK • 2000 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 18 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Elegant</h4><p>₹2.4 Cr • 4 BHK • 2700 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 19 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Compact</h4><p>₹60L • 2 BHK • 1000 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- ITEM 20 -->
-    <div class="g-item"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200" loading="lazy"><div class="g-overlay"><h4>Skyline Penthouse</h4><p>₹5 Cr • 5 BHK • 4200 sq.ft</p><div class="actions"><button class="view" onclick="openModalFromGallery(this)">View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div></div>
-
-    <!-- Add more by duplicating any g-item block above -->
-
-  </div>
-</section>
-
-<section id="contact" class="fade">
-  <h2>Contact</h2>
-  <p>Reach us instantly via call or WhatsApp</p>
-  <div class="contact-buttons">
-    <button class="whatsapp" onclick="contactWhatsApp()">WhatsApp</button>
-    <button class="call" onclick="callNow()">Call</button>
-  </div>
+<section id="contact">
+<h2>Contact</h2>
+<button class="wa" onclick="contactWhatsApp()">WhatsApp</button>
+<button class="call" onclick="callNow()">Call</button>
 </section>
 
 <div class="modal" id="modal">
-  <div class="modal-content">
-    <img id="modalImg" alt="">
-    <h3 id="modalTitle"></h3>
-    <p id="modalDesc"></p>
-    <button class="whatsapp" onclick="contactWhatsApp()">WhatsApp</button>
-    <button class="call" onclick="callNow()">Call</button>
-    <button class="close" onclick="closeModal()">Close</button>
-  </div>
+<div class="modal-content">
+<div class="slider">
+<button class="nav-btn prev" onclick="changeSlide(-1)">‹</button>
+<img id="slideImg">
+<button class="nav-btn next" onclick="changeSlide(1)">›</button>
+</div>
+<div id="slideTitle"></div>
+<div id="slideDesc"></div>
+<div class="thumbs" id="thumbs"></div>
+<button class="wa" onclick="contactWhatsApp()">WhatsApp</button>
+<button class="call" onclick="callNow()">Call</button>
+<button onclick="closeModal()">Close</button>
+</div>
 </div>
 
-<footer>
-  <p>© 2026 Naitrika Real Estates. All rights reserved.</p>
-</footer>
+<footer>© 2026 Naitrika Real Estates</footer>
 
 <script>
-let phone="+919999999999"; // change to your number
+let phone="+919999999999";
 
-// ===== Properties (auto) =====
-const properties = Array.from({length:20},(_,i)=>({
-  img:`https://source.unsplash.com/800x600/?house,realestate&sig=${i}`,
-  title:`Luxury Property ${i+1}`,
-  desc:`₹${(i+1)*50}L • ${(i%5)+2} BHK • ${(i+1)*500} sq.ft`
+const data=Array.from({length:20},(_,i)=>({
+ type:i%2?'villa':'apartment',
+ title:`Property ${i+1}`,
+ desc:`₹${(i+1)*40}L • ${(i+1)*400} sq.ft`,
+ images:[
+ `https://source.unsplash.com/800x600/?house&sig=${i}`,
+ `https://source.unsplash.com/800x600/?interior&sig=${i}`,
+ `https://source.unsplash.com/800x600/?living-room&sig=${i}`
+ ]
 }));
-const grid=document.getElementById('grid');
-properties.forEach(p=>{
-  let card=document.createElement('div');
-  card.className='card fade';
-  card.innerHTML=`
-    <img src="${p.img}" loading="lazy" alt="${p.title}">
-    <div class="content">
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      <button onclick="openModal(this)">View</button>
-    </div>`;
-  grid.appendChild(card);
-});
 
-// ===== Modal =====
-function openModal(el){
-  const card=el.closest('.card');
-  document.getElementById('modal').style.display='flex';
-  document.getElementById('modalImg').src=card.querySelector('img').src;
-  document.getElementById('modalTitle').innerText=card.querySelector('h3').innerText;
-  document.getElementById('modalDesc').innerText=card.querySelector('p').innerText;
+const wrap=document.getElementById('galleryWrap');
+function render(filter='all'){
+ wrap.innerHTML='';
+ data.filter(d=>filter==='all'||d.type===filter).forEach(d=>{
+ let el=document.createElement('div');
+ el.className='g-box';
+ el.innerHTML=`<img src="${d.images[0]}"><div class="g-info"><h4>${d.title}</h4><p>${d.desc}</p><div class="g-actions"><button class="view" onclick='openModal(${JSON.stringify(d)})'>View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div>`;
+ wrap.appendChild(el);
+ });
 }
-function openModalFromGallery(btn){
-  const item=btn.closest('.g-item');
-  document.getElementById('modal').style.display='flex';
-  document.getElementById('modalImg').src=item.querySelector('img').src;
-  document.getElementById('modalTitle').innerText=item.querySelector('h4').innerText;
-  document.getElementById('modalDesc').innerText=item.querySelector('p').innerText;
+render();
+
+function filterGallery(type,btn){
+ document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ render(type);
 }
-function closeModal(){document.getElementById('modal').style.display='none';}
-function contactWhatsApp(){window.open(`https://wa.me/${phone}`,'_blank');}
-function callNow(){window.location.href=`tel:${phone}`;}
 
-// ===== Smooth fade-in =====
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') })
-},{threshold:0.1});
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+let current=0,images=[];
+function openModal(d){
+ images=d.images;current=0;
+ modal.style.display='flex';
+ updateSlide(d);
+}
+function updateSlide(d){
+ slideImg.src=images[current];
+ slideTitle.innerText=d.title;
+ slideDesc.innerText=d.desc;
+ thumbs.innerHTML='';
+ images.forEach((img,i)=>{
+ let t=document.createElement('img');
+ t.src=img;t.onclick=()=>{current=i;updateSlide(d)};
+ if(i===current)t.classList.add('active');
+ thumbs.appendChild(t);
+ });
+}
+function changeSlide(dir){
+ current=(current+dir+images.length)%images.length;
+ slideImg.src=images[current];
+ document.querySelectorAll('.thumbs img').forEach((t,i)=>{
+ t.classList.toggle('active',i===current);
+ });
+}
+function closeModal(){modal.style.display='none'}
 
-// ===== Active nav highlight on scroll =====
-const links=[...document.querySelectorAll('.nav-link')];
-const sections=[...document.querySelectorAll('section')];
-const spy=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      links.forEach(l=>l.classList.remove('active'));
-      const id=e.target.getAttribute('id');
-      const active=document.querySelector(`a[href="#${id}"]`);
-      if(active) active.classList.add('active');
-    }
-  })
-},{rootMargin:'-50% 0px -40% 0px', threshold:0});
-sections.forEach(s=>spy.observe(s));
+function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
+function callNow(){window.location.href=`tel:${phone}`}
 </script>
 
 </body>
