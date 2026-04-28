@@ -7,180 +7,96 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-html{scroll-behavior:smooth}
-body{background:#0a0a0a;color:#fff;overflow-x:hidden}
-
-/* NAV */
-nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 36px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1);z-index:1000}
-nav ul{display:flex;gap:28px;list-style:none}
-nav a{color:#fff;text-decoration:none;position:relative}
-nav a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#fff;transition:.3s}
-nav a:hover::after, nav a.active::after{width:100%}
-section{padding:110px 40px}
-#home{padding-top:0}
-
-.hero{height:100vh;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column}
-.hero h2{font-size:48px;background:rgba(0,0,0,0.4);padding:20px;border-radius:20px}
-.hero p{margin-top:10px;color:#ccc}
-
-/* GALLERY V2 */
-.filters{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.filters button{padding:8px 14px;border:none;border-radius:20px;background:#222;color:#fff;cursor:pointer}
-.filters button.active{background:#fff;color:#000}
+body{background:#0a0a0a;color:#fff}
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 30px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px)}
+nav a{color:#fff;text-decoration:none;margin:0 10px}
+section{padding:100px 30px}
+.hero{height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover}
 
 .gallery{column-count:4;column-gap:15px}
 @media(max-width:1000px){.gallery{column-count:2}}
 @media(max-width:600px){.gallery{column-count:1}}
 
-.g-box{break-inside:avoid;margin-bottom:15px;position:relative;border-radius:15px;overflow:hidden}
-.g-box img{width:100%;display:block;border-radius:15px}
-.g-info{position:absolute;bottom:0;left:0;right:0;padding:15px;background:linear-gradient(transparent,rgba(0,0,0,0.8));opacity:0;transition:.3s}
+.g-box{break-inside:avoid;margin-bottom:15px;position:relative}
+.g-box img{width:100%;border-radius:12px}
+.g-info{position:absolute;bottom:0;width:100%;padding:10px;background:linear-gradient(transparent,rgba(0,0,0,0.8));opacity:0;transition:.3s}
 .g-box:hover .g-info{opacity:1}
-.g-actions{margin-top:8px;display:flex;gap:8px}
-.g-actions button{flex:1;padding:8px;border:none;border-radius:8px;cursor:pointer}
-.view{background:#fff;color:#000}
-.wa{background:#25D366;color:#fff}
-.call{background:#007BFF;color:#fff}
 
-/* MODAL SLIDER */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:2000}
-.modal-content{width:90%;max-width:800px;text-align:center}
-.slider{position:relative}
-.slider img{width:100%;border-radius:12px}
-.nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:#0008;color:#fff;border:none;padding:10px;border-radius:50%;cursor:pointer}
-.prev{left:10px}
-.next{right:10px}
-.thumbs{display:flex;gap:6px;margin-top:10px;overflow:auto}
-.thumbs img{width:70px;height:50px;object-fit:cover;border-radius:6px;opacity:.6;cursor:pointer}
-.thumbs img.active{opacity:1;border:2px solid #fff}
-.modal button{margin:10px;padding:10px 15px;border:none;border-radius:10px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center}
+.modal img{max-width:90%;border-radius:10px}
+.modal button{margin:10px;padding:10px}
 
-footer{text-align:center;padding:30px;background:#000}
 </style>
 </head>
 <body>
 
 <nav>
-<h1>Naitrika Real Estates</h1>
-<ul>
-<li><a href="#home">HOME</a></li>
-<li><a href="#gallery">GALLERY</a></li>
-<li><a href="#contact">CONTACT</a></li>
-</ul>
+<h2>Naitrika Real Estates</h2>
+<div>
+<a href="#home">Home</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+</div>
 </nav>
 
 <section id="home" class="hero">
-<h2>Luxury Living</h2>
-<p>From Land To Luxury Living</p>
+<h1>From Land To Luxury Living</h1>
 </section>
 
 <section id="gallery">
-<h2>Premium Gallery</h2>
+<h2>Gallery</h2>
+<div class="gallery">
 
-<div class="filters">
-<button class="active" onclick="filterGallery('all',this)">All</button>
-<button onclick="filterGallery('villa',this)">Villa</button>
-<button onclick="filterGallery('apartment',this)">Apartment</button>
+<!-- MANUAL IMAGE BLOCK (EDIT HERE) -->
+<div class="g-box">
+<img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200">
+<div class="g-info">
+<h4>Villa 1</h4>
+<p>₹2.5 Cr • 3200 sq.ft</p>
+<button onclick="openModal(this)">View</button>
+</div>
 </div>
 
-<div class="gallery" id="galleryWrap"></div>
+<div class="g-box">
+<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200">
+<div class="g-info"><h4>Apartment</h4><p>₹1.2 Cr • 1800 sq.ft</p><button onclick="openModal(this)">View</button></div>
+</div>
+
+<div class="g-box">
+<img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200">
+<div class="g-info"><h4>House</h4><p>₹3 Cr • 4000 sq.ft</p><button onclick="openModal(this)">View</button></div>
+</div>
+
+<!-- COPY ABOVE BLOCK TO ADD MORE IMAGES -->
+
+</div>
 </section>
 
 <section id="contact">
 <h2>Contact</h2>
-<button class="wa" onclick="contactWhatsApp()">WhatsApp</button>
-<button class="call" onclick="callNow()">Call</button>
+<button onclick="callNow()">Call</button>
+<button onclick="contactWhatsApp()">WhatsApp</button>
 </section>
 
 <div class="modal" id="modal">
-<div class="modal-content">
-<div class="slider">
-<button class="nav-btn prev" onclick="changeSlide(-1)">‹</button>
-<img id="slideImg">
-<button class="nav-btn next" onclick="changeSlide(1)">›</button>
-</div>
-<div id="slideTitle"></div>
-<div id="slideDesc"></div>
-<div class="thumbs" id="thumbs"></div>
-<button class="wa" onclick="contactWhatsApp()">WhatsApp</button>
-<button class="call" onclick="callNow()">Call</button>
+<div>
+<img id="modalImg">
+<br>
 <button onclick="closeModal()">Close</button>
 </div>
 </div>
 
-<footer>© 2026 Naitrika Real Estates</footer>
-
 <script>
 let phone="+919999999999";
 
-const data=Array.from({length:20},(_,i)=>({
- type:i%2?'villa':'apartment',
- title:`Property ${i+1}`,
- desc:`₹${(i+1)*40}L • ${(i+1)*400} sq.ft`,
- images:[
-  'img1'Images/john-fornander-tVzyDSV84w8-unsplash.jpg,
- `https://source.unsplash.com/800x600/?interior&sig=${i}`,
- `https://source.unsplash.com/800x600/?living-room&sig=${i}`
- ]
- {
-  type: 'villa',
-  title: 'Property Name',
-  desc: '₹ Price • sq.ft',
-  images: [
-    'img1'Images/john-fornander-tVzyDSV84w8-unsplash.jpg,
-    'img2',
-    'img3'
-  ]
-}
-}));
-
-const wrap=document.getElementById('galleryWrap');
-function render(filter='all'){
- wrap.innerHTML='';
- data.filter(d=>filter==='all'||d.type===filter).forEach(d=>{
- let el=document.createElement('div');
- el.className='g-box';
- el.innerHTML=`<img src="${d.images[0]}"><div class="g-info"><h4>${d.title}</h4><p>${d.desc}</p><div class="g-actions"><button class="view" onclick='openModal(${JSON.stringify(d)})'>View</button><button class="wa" onclick="contactWhatsApp()">WA</button><button class="call" onclick="callNow()">Call</button></div></div>`;
- wrap.appendChild(el);
- });
-}
-render();
-
-function filterGallery(type,btn){
- document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
- btn.classList.add('active');
- render(type);
-}
-
-let current=0,images=[];
-function openModal(d){
- images=d.images;current=0;
- modal.style.display='flex';
- updateSlide(d);
-}
-function updateSlide(d){
- slideImg.src=images[current];
- slideTitle.innerText=d.title;
- slideDesc.innerText=d.desc;
- thumbs.innerHTML='';
- images.forEach((img,i)=>{
- let t=document.createElement('img');
- t.src=img;t.onclick=()=>{current=i;updateSlide(d)};
- if(i===current)t.classList.add('active');
- thumbs.appendChild(t);
- });
-}
-function changeSlide(dir){
- current=(current+dir+images.length)%images.length;
- slideImg.src=images[current];
- document.querySelectorAll('.thumbs img').forEach((t,i)=>{
- t.classList.toggle('active',i===current);
- });
+function openModal(btn){
+let box=btn.closest('.g-box');
+modal.style.display='flex';
+modalImg.src=box.querySelector('img').src;
 }
 function closeModal(){modal.style.display='none'}
-
-function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
 function callNow(){window.location.href=`tel:${phone}`}
+function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
 </script>
 
 </body>
