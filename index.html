@@ -9,17 +9,18 @@
 
 <style>
 :root{
-  --bg:#0a0a0a;
-  --text:#fff;
-  --glass:rgba(255,255,255,0.06);
-  --gold:#d4af37;
-}
-
-/* LIGHT MODE */
-.light{
+  /* DEFAULT LIGHT THEME */
   --bg:#f5f5f5;
   --text:#111;
   --glass:rgba(0,0,0,0.05);
+  --gold:#d4af37;
+}
+
+/* DARK MODE */
+.dark{
+  --bg:#0a0a0a;
+  --text:#fff;
+  --glass:rgba(255,255,255,0.06);
 }
 
 html{scroll-behavior:smooth;}
@@ -27,7 +28,7 @@ html{scroll-behavior:smooth;}
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background: radial-gradient(circle at top,#111,#000);
+  background:var(--bg);
   color:var(--text);
   transition:0.4s;
 }
@@ -40,14 +41,13 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   z-index:9999;
-  animation:fadeOut 1s ease 3.5s forwards;
+  animation:fadeOut 1s ease 3s forwards;
 }
 
 #intro h1{
   font-family:'Playfair Display',serif;
-  font-size:40px;
+  font-size:36px;
   background:linear-gradient(90deg,#d4af37,#fff,#d4af37);
   background-size:200%;
   -webkit-background-clip:text;
@@ -68,11 +68,12 @@ body{
 nav{
   display:flex;
   justify-content:space-between;
-  padding:20px 50px;
+  align-items:center;
+  padding:15px 30px;
+  backdrop-filter:blur(20px);
+  background:var(--glass);
   position:sticky;
   top:0;
-  backdrop-filter:blur(20px);
-  background:rgba(0,0,0,0.4);
   z-index:1000;
 }
 
@@ -85,7 +86,7 @@ nav{
 }
 
 .logo-box{
-  width:25px;height:25px;
+  width:22px;height:22px;
   border:2px solid var(--gold);
   transform:rotate(45deg);
 }
@@ -93,82 +94,80 @@ nav{
 nav ul{
   display:flex;
   list-style:none;
-  gap:25px;
+  gap:20px;
   align-items:center;
 }
 
 nav a{
   text-decoration:none;
   color:var(--text);
+  font-size:14px;
 }
 
 nav a:hover{color:var(--gold);}
 
-/* TOGGLE */
 .toggle{
   cursor:pointer;
   font-size:18px;
 }
 
-/* SECTIONS */
-section{padding:80px 60px;text-align:center;}
+/* HERO */
+section{
+  padding:60px 20px;
+  text-align:center;
+}
 
 .hero h1{
-  font-size:60px;
+  font-size:40px;
   color:var(--gold);
 }
 
 .hero p{
-  font-size:22px;
-  margin-top:10px;
-  opacity:0.9;
-}
-
-/* LIQUID GLASS */
-.card, .contact-box, nav{
-  background:var(--glass);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.1);
+  font-size:18px;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:25px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  padding:10px;
 }
 
 .card{
-  border-radius:20px;
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border-radius:15px;
   overflow:hidden;
   cursor:pointer;
   transition:0.4s;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
+  transform:translateY(-8px);
 }
 
 .card img{
   width:100%;
-  height:220px;
+  height:180px;
   object-fit:cover;
 }
 
-.info{padding:15px;}
+.info{padding:10px;}
 .dimension{color:var(--gold);}
 
 /* CONTACT */
 .contact-box{
-  max-width:500px;
+  max-width:400px;
   margin:auto;
-  padding:30px;
-  border-radius:20px;
+  background:var(--glass);
+  padding:20px;
+  border-radius:15px;
 }
 
 .contact-box a{
   display:block;
-  margin:10px;
+  margin:8px;
   color:var(--gold);
   text-decoration:none;
 }
@@ -177,48 +176,69 @@ section{padding:80px 60px;text-align:center;}
 #modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.7);
   display:none;
   justify-content:center;
   align-items:center;
-  z-index:9999;
 }
 
 .modal-box{
-  background:#111;
+  background:#fff;
+  color:#000;
   width:90%;
-  max-width:700px;
-  border-radius:20px;
+  max-width:500px;
+  border-radius:15px;
   overflow:hidden;
-  animation:zoom 0.4s;
 }
 
-@keyframes zoom{from{transform:scale(0.8);}to{transform:scale(1);}}
+.modal-box img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
 
-.modal-box img{width:100%;height:300px;object-fit:cover;}
-
-.modal-content{padding:20px;}
+.modal-content{padding:15px;}
 
 .btn{
   display:inline-block;
   margin-top:10px;
-  padding:10px 15px;
-  border-radius:20px;
-  text-decoration:none;
+  padding:8px 12px;
+  border-radius:15px;
   background:var(--gold);
   color:#000;
+  text-decoration:none;
 }
 
 .close{
   position:absolute;
-  top:15px;
-  right:25px;
-  font-size:25px;
+  top:10px;
+  right:20px;
+  font-size:22px;
   cursor:pointer;
 }
 
-footer{text-align:center;padding:20px;opacity:0.5;}
+footer{
+  text-align:center;
+  padding:15px;
+  font-size:13px;
+}
 
+/* MOBILE NAV */
+@media(max-width:768px){
+  nav{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  nav ul{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+}
 </style>
 </head>
 
@@ -277,7 +297,7 @@ footer{text-align:center;padding:20px;opacity:0.5;}
     <img id="modalImg">
     <div class="modal-content">
       <h2 id="title"></h2>
-      <p id="size" class="dimension"></p>
+      <p id="size"></p>
       <p id="desc"></p>
       <a class="btn" href="tel:+919999999999">Call</a>
       <a class="btn" href="https://wa.me/919999999999">WhatsApp</a>
@@ -287,7 +307,7 @@ footer{text-align:center;padding:20px;opacity:0.5;}
 
 <script>
 function toggleTheme(){
-  document.body.classList.toggle("light");
+  document.body.classList.toggle("dark");
 }
 
 const grid=document.getElementById("grid");
