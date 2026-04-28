@@ -3,55 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naitrika Real Estate</title>
+<title>Naitrika Real Estates</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg: #0b0b0c;
-  --text: #ffffff;
-  --card: rgba(255,255,255,0.05);
-  --accent: #c8a96a;
-}
-
-.light{
-  --bg: #f5f5f5;
-  --text: #111;
-  --card: rgba(0,0,0,0.05);
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Inter', sans-serif;
+  --bg:#0a0a0a;
+  --text:#fff;
+  --glass:rgba(255,255,255,0.06);
+  --accent:#d4af37;
 }
 
 body{
-  background: var(--bg);
-  color: var(--text);
-  transition:0.4s;
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background: radial-gradient(circle at top,#111,#000);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* INTRO */
+#intro{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+  animation:fadeOut 1s ease 3.5s forwards;
+}
+
+.house{
+  width:60px;
+  height:60px;
+  border:2px solid var(--accent);
+  transform:rotate(45deg);
+  margin-bottom:20px;
+  animation:float 2s infinite ease-in-out;
+}
+
+#intro h1{
+  font-family:'Playfair Display',serif;
+  letter-spacing:3px;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(45deg);}
+  50%{transform:translateY(-15px) rotate(45deg);}
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
+}
+
+/* NAV */
 nav{
   display:flex;
   justify-content:space-between;
   padding:20px 50px;
-  backdrop-filter: blur(20px);
   position:sticky;
   top:0;
+  backdrop-filter:blur(20px);
+  background:rgba(0,0,0,0.3);
 }
 
 .logo{
-  font-size:24px;
-  font-weight:600;
+  font-family:'Playfair Display',serif;
+  font-size:26px;
   letter-spacing:2px;
 }
 
-.toggle{
-  cursor:pointer;
+.nav-btns a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#000;
+  background:var(--accent);
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:14px;
 }
 
 /* HERO */
@@ -64,23 +97,16 @@ nav{
 }
 
 .hero h1{
-  font-size:60px;
-  font-weight:600;
+  font-family:'Playfair Display',serif;
+  font-size:64px;
+  letter-spacing:2px;
 }
 
-.hero p{
+.hero span{
+  display:block;
+  font-size:18px;
   margin-top:10px;
   opacity:0.7;
-}
-
-.btn{
-  margin-top:20px;
-  padding:12px 25px;
-  border:none;
-  background:var(--accent);
-  color:#000;
-  cursor:pointer;
-  border-radius:30px;
 }
 
 /* GALLERY */
@@ -88,33 +114,34 @@ nav{
   padding:60px;
 }
 
-.gallery h2{
-  font-size:32px;
-  margin-bottom:30px;
-}
-
 .grid{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:25px;
 }
 
 .card{
-  background:var(--card);
-  backdrop-filter: blur(15px);
+  background:var(--glass);
+  backdrop-filter:blur(20px);
   border-radius:20px;
   overflow:hidden;
   transition:0.4s;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 20px 50px rgba(0,0,0,0.7);
 }
 
 .card img{
   width:100%;
   height:220px;
   object-fit:cover;
+  transition:0.5s;
+}
+
+.card:hover img{
+  transform:scale(1.1);
 }
 
 .info{
@@ -122,9 +149,8 @@ nav{
 }
 
 .dimension{
-  font-size:14px;
   color:var(--accent);
-  margin-bottom:5px;
+  font-size:14px;
 }
 
 .desc{
@@ -132,11 +158,45 @@ nav{
   opacity:0.8;
 }
 
+/* SOCIAL FOOTER */
+.social{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:30px;
+}
+
+.social a{
+  text-decoration:none;
+  font-size:20px;
+  background:var(--glass);
+  padding:12px;
+  border-radius:50%;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
+}
+
+.social a:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* FLOAT BTN */
+.float{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:var(--accent);
+  padding:15px 20px;
+  border-radius:50px;
+  cursor:pointer;
+}
+
 /* FOOTER */
 footer{
   text-align:center;
-  padding:30px;
-  opacity:0.6;
+  opacity:0.5;
+  padding-bottom:20px;
 }
 
 </style>
@@ -144,58 +204,69 @@ footer{
 
 <body>
 
+<!-- INTRO -->
+<div id="intro">
+  <div class="house"></div>
+  <h1>Naitrika Real Estates</h1>
+</div>
+
+<!-- NAV -->
 <nav>
   <div class="logo">NAITRIKA</div>
-  <div class="toggle" onclick="toggleTheme()">🌗</div>
+  <div class="nav-btns">
+    <a href="tel:+919999999999">Call</a>
+    <a href="https://wa.me/919999999999">WhatsApp</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div>
-    <h1>Luxury Living Redefined</h1>
-    <p>Discover premium plots, villas & apartments</p>
-    <button class="btn">Explore Properties</button>
+    <h1>Naitrika Real Estates</h1>
+    <span>From Land To Luxury Living</span>
   </div>
 </section>
 
+<!-- GALLERY -->
 <section class="gallery">
-  <h2>Featured Properties</h2>
-
-  <div class="grid">
-
-    <!-- 20 PROPERTY CARDS -->
-
-    <!-- REPEAT BLOCK -->
-    <script>
-      const container = document.currentScript.parentElement;
-
-      for(let i=1;i<=20;i++){
-        const card = document.createElement('div');
-        card.className='card';
-
-        card.innerHTML = `
-          <img src="https://picsum.photos/500/300?random=${i}">
-          <div class="info">
-            <div class="dimension">${1200 + i*50} sq.ft</div>
-            <div class="desc">
-              Premium residential plot with modern surroundings,
-              perfect for luxury living and investment opportunity.
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      }
-    </script>
-
-  </div>
+  <div class="grid" id="grid"></div>
 </section>
+
+<!-- FLOAT BUTTON -->
+<div class="float" onclick="window.open('https://wa.me/919999999999')">
+  Contact
+</div>
+
+<!-- SOCIAL -->
+<div class="social">
+  <a href="#">📷</a>
+  <a href="#">💬</a>
+  <a href="#">📞</a>
+  <a href="#">✉️</a>
+</div>
 
 <footer>
-  © 2026 Naitrika Real Estate — Luxury Properties
+  © 2026 Naitrika Real Estates
 </footer>
 
 <script>
-function toggleTheme(){
-  document.body.classList.toggle("light");
+const grid = document.getElementById("grid");
+
+for(let i=1;i<=20;i++){
+  const card=document.createElement("div");
+  card.className="card";
+
+  card.innerHTML=`
+    <img src="https://picsum.photos/500/300?random=${i}">
+    <div class="info">
+      <div class="dimension">${1200+i*50} sq.ft</div>
+      <div class="desc">
+        Premium luxury property located in a high-growth area with modern infrastructure.
+      </div>
+    </div>
+  `;
+
+  grid.appendChild(card);
 }
 </script>
 
