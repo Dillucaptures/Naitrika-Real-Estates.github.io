@@ -9,9 +9,11 @@
 
 <style>
 :root{
-  --bg:#0a0a0a;   /* DARK DEFAULT */
-  --text:#fff;
+  /* DARK DEFAULT */
+  --bg:#0a0a0a;
+  --text:#ffffff;
   --glass:rgba(255,255,255,0.06);
+  --glass-strong:rgba(255,255,255,0.12);
   --gold:#d4af37;
 }
 
@@ -20,14 +22,17 @@
   --bg:#f5f5f5;
   --text:#111;
   --glass:rgba(0,0,0,0.05);
+  --glass-strong:rgba(0,0,0,0.1);
 }
+
+html{scroll-behavior:smooth;}
 
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:var(--bg);
+  background: radial-gradient(circle at top,#111,#000);
   color:var(--text);
-  transition:0.4s;
+  transition:all 0.5s ease;
 }
 
 /* INTRO */
@@ -49,7 +54,7 @@ body{
   background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:shine 1.3s linear infinite;
+  animation:shine 1.5s linear infinite;
 }
 
 @keyframes shine{
@@ -67,10 +72,11 @@ nav{
   justify-content:space-between;
   align-items:center;
   padding:15px 30px;
-  backdrop-filter:blur(20px);
-  background:var(--glass);
   position:sticky;
   top:0;
+  backdrop-filter:blur(25px);
+  background:var(--glass);
+  border-bottom:1px solid var(--glass-strong);
   z-index:1000;
 }
 
@@ -78,47 +84,61 @@ nav{
   font-family:'Playfair Display',serif;
   color:var(--gold);
   font-size:20px;
+  letter-spacing:1px;
 }
 
 nav ul{
   display:flex;
-  list-style:none;
   gap:20px;
   align-items:center;
+  list-style:none;
 }
 
 nav a{
   text-decoration:none;
   color:var(--text);
+  position:relative;
+  transition:0.3s;
 }
 
-nav a:hover{color:var(--gold);}
+nav a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  bottom:-3px;
+  left:0;
+  background:var(--gold);
+  transition:0.3s;
+}
 
-/* TOGGLE SWITCH */
+nav a:hover::after{
+  width:100%;
+}
+
+/* SWITCH */
 .switch{
-  position:relative;
   width:50px;
   height:25px;
+  position:relative;
 }
 
-.switch input{
-  display:none;
-}
+.switch input{display:none;}
 
 .slider{
   position:absolute;
-  cursor:pointer;
   inset:0;
-  background:#555;
+  background:#444;
   border-radius:50px;
+  cursor:pointer;
   transition:0.3s;
 }
 
 .slider:before{
   content:"";
   position:absolute;
-  width:18px;
   height:18px;
+  width:18px;
   left:4px;
   top:3px;
   background:white;
@@ -136,25 +156,36 @@ input:checked + .slider:before{
 
 /* SECTIONS */
 section{
-  padding:60px 20px;
+  padding:80px 20px;
   text-align:center;
 }
 
+/* HERO */
 .hero h1{
-  font-size:56px;
+  font-size:64px;
   color:var(--gold);
+  animation:fadeUp 1s ease;
 }
 
 .hero p{
   font-size:22px;
+  opacity:0.8;
+  animation:fadeUp 1.3s ease;
 }
 
-/* GLASS */
+/* GLASS UI */
 .glass{
   background:var(--glass);
-  backdrop-filter:blur(25px);
+  backdrop-filter:blur(30px);
+  border:1px solid var(--glass-strong);
   border-radius:20px;
-  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  transition:0.4s;
+}
+
+.glass:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
 }
 
 /* ABOUT */
@@ -162,6 +193,7 @@ section{
   max-width:700px;
   margin:auto;
   padding:30px;
+  line-height:1.7;
 }
 
 /* SERVICES */
@@ -181,23 +213,23 @@ section{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  gap:25px;
 }
 
 .card{
   overflow:hidden;
   cursor:pointer;
-  transition:0.4s;
-}
-
-.card:hover{
-  transform:translateY(-10px);
 }
 
 .card img{
   width:100%;
   height:180px;
   object-fit:cover;
+  transition:0.5s;
+}
+
+.card:hover img{
+  transform:scale(1.1);
 }
 
 .info{padding:12px;}
@@ -207,20 +239,20 @@ section{
 #modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.8);
   display:none;
   justify-content:center;
   align-items:center;
 }
 
 .modal-box{
-  position:relative;
   background:#fff;
   color:#000;
   width:90%;
   max-width:500px;
   border-radius:15px;
   overflow:hidden;
+  animation:fadeUp 0.4s ease;
 }
 
 .modal-box img{
@@ -233,13 +265,11 @@ section{
 
 .close{
   position:absolute;
-  top:10px;
-  right:10px;
-  background:#000;
-  color:#fff;
-  padding:5px 10px;
-  border-radius:50%;
+  top:15px;
+  right:20px;
   cursor:pointer;
+  font-size:22px;
+  color:white;
 }
 
 /* CONTACT */
@@ -253,7 +283,12 @@ section{
   display:block;
   margin:10px;
   color:var(--gold);
-  text-decoration:none;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 footer{
@@ -281,7 +316,6 @@ footer{
     <li><a href="#properties">Properties</a></li>
     <li><a href="#contact">Contact</a></li>
 
-    <!-- TOGGLE -->
     <li>
       <label class="switch">
         <input type="checkbox" onclick="toggleTheme()">
@@ -299,12 +333,9 @@ footer{
 
 <!-- ABOUT -->
 <section id="about">
-  <h2>About Us</h2>
+  <h2>About</h2>
   <div class="about-card glass">
-    <p>
-      Naitrika Real Estates specializes in premium plots, villas, and luxury developments.
-      We focus on high-growth locations and long-term investment value.
-    </p>
+    Naitrika Real Estates delivers premium plots, villas, and high-value investments with modern infrastructure and future growth potential.
   </div>
 </section>
 
@@ -319,13 +350,13 @@ footer{
   <h2>Our Services</h2>
   <div class="services glass">
     <ul>
-      <li>✔️ All Constructions</li>
-      <li>✔️ Interior Works</li>
-      <li>✔️ Painting Works</li>
-      <li>✔️ Plumbing Works</li>
-      <li>✔️ Electrical Works</li>
-      <li>✔️ Cupboard Works</li>
-      <li>✔️ CCTV Camera Installation</li>
+      <li>✔ All Constructions</li>
+      <li>✔ Interior Works</li>
+      <li>✔ Painting Works</li>
+      <li>✔ Plumbing Works</li>
+      <li>✔ Electrical Works</li>
+      <li>✔ Cupboard Works</li>
+      <li>✔ CCTV Camera Installation</li>
     </ul>
   </div>
 </section>
@@ -336,7 +367,6 @@ footer{
   <div class="contact-box glass">
     <a href="tel:+919999999999">📞 Call</a>
     <a href="https://wa.me/919999999999">💬 WhatsApp</a>
-    <a href="mailto:info@naitrika.com">✉️ Email</a>
   </div>
 </section>
 
@@ -344,8 +374,8 @@ footer{
 
 <!-- MODAL -->
 <div id="modal">
+  <span class="close" onclick="closeModal()">✖</span>
   <div class="modal-box">
-    <span class="close" onclick="closeModal()">✖</span>
     <img id="modalImg">
     <div class="modal-content">
       <h2 id="title"></h2>
@@ -360,11 +390,11 @@ function toggleTheme(){
   document.body.classList.toggle("light");
 }
 
-/* 👉 ADD YOUR IMAGES HERE */
+/* PROPERTY DATA */
 const properties = [
   {img:"images/p1.jpg", size:"1200 sq.ft", desc:"Premium plot"},
   {img:"images/p2.jpg", size:"1500 sq.ft", desc:"Luxury villa"},
-  {img:"images/p3.jpg", size:"1800 sq.ft", desc:"Modern house"}
+  {img:"images/p3.jpg", size:"1800 sq.ft", desc:"Modern design"}
 ];
 
 const grid=document.getElementById("grid");
@@ -397,7 +427,7 @@ function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* CLICK OUTSIDE CLOSE */
+/* CLICK OUTSIDE */
 document.getElementById("modal").addEventListener("click",(e)=>{
   if(e.target.id==="modal") closeModal();
 });
