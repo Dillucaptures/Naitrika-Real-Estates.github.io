@@ -3,130 +3,335 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naitrika Real Estates</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<title>Naitrika Constructions & Real Estates</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:#0a0a0a;color:#fff}
 
-nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 30px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);z-index:1000}
-nav a{color:#fff;text-decoration:none;margin:0 10px}
-section{padding:100px 30px}
-
-.hero{height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover}
-
-.gallery{column-count:4;column-gap:15px}
-@media(max-width:1000px){.gallery{column-count:2}}
-@media(max-width:600px){.gallery{column-count:1}}
-
-.g-box{break-inside:avoid;margin-bottom:15px;cursor:pointer;position:relative}
-.g-box img{width:100%;border-radius:12px}
-.g-desc{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-padding:10px;
-background:linear-gradient(transparent,rgba(0,0,0,0.8));
-font-size:13px;
+/* ===== THEME ===== */
+:root{
+  --bg:#0b0b0b;
+  --text:#f5f5f5;
+  --glass:rgba(255,255,255,0.05);
 }
 
-/* MODAL */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:2000}
-.modal-content{position:relative;max-width:90%;max-height:90%;text-align:center}
-.modal img{width:100%;border-radius:12px}
-.modal h3{margin-top:10px}
-.modal p{color:#ccc;margin-top:5px}
-.close-btn{position:absolute;top:-40px;right:0;background:#fff;color:#000;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  scroll-behavior:smooth;
+}
 
-footer{text-align:center;padding:30px;background:#000}
+/* ===== INTRO ===== */
+.intro{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.intro-text{
+  font-family:'Playfair Display';
+  font-size:40px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+@keyframes fadeIn{
+  to{opacity:1}
+}
+.intro.hide{
+  animation:fadeOut 1s forwards;
+}
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+
+/* ===== NAV ===== */
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  padding:18px 60px;
+  backdrop-filter:blur(20px);
+  background:var(--glass);
+  z-index:1000;
+}
+
+header h1{
+  font-family:'Playfair Display';
+  font-size:20px;
+}
+
+nav a{
+  margin-left:25px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:14px;
+  opacity:.8;
+}
+nav a:hover{opacity:1}
+
+/* ===== HERO ===== */
+.hero{
+  display:flex;
+  align-items:center;
+  min-height:100vh;
+  padding:120px 60px;
+  position:relative;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:0;
+  width:50%;
+  height:100%;
+  background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover;
+}
+.hero-text{
+  max-width:500px;
+}
+.hero-text h2{
+  font-family:'Playfair Display';
+  font-size:48px;
+}
+.hero-text p{
+  margin-top:10px;
+  color:#aaa;
+}
+
+/* ===== SECTIONS ===== */
+section{padding:120px 60px}
+
+/* ===== ABOUT ===== */
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+.about img{
+  width:100%;
+  border-radius:20px;
+}
+
+/* ===== PROPERTY GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.card{
+  background:var(--glass);
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+}
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.card .info{
+  padding:15px;
+}
+
+/* ===== MODAL ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.95);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+.modal-content{
+  background:#111;
+  border-radius:16px;
+  max-width:900px;
+  width:95%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  padding:20px;
+}
+.modal img{
+  width:100%;
+  border-radius:12px;
+}
+.details h2{margin-bottom:10px}
+.details p{color:#bbb;margin:6px 0}
+.features span{
+  display:inline-block;
+  background:#222;
+  padding:6px 10px;
+  border-radius:8px;
+  margin:4px;
+  font-size:12px;
+}
+.actions button{
+  margin-top:10px;
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+.whatsapp{background:#25D366;color:#fff}
+.call{background:#007BFF;color:#fff}
+.close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* ===== CONTACT ===== */
+.btn{
+  display:inline-block;
+  padding:12px 25px;
+  border-radius:30px;
+  background:var(--glass);
+  text-decoration:none;
+  color:var(--text);
+  margin:10px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  header{padding:15px 20px}
+  section{padding:100px 20px}
+  .hero{flex-direction:column}
+  .hero::after{width:100%;height:50%}
+  .hero-text{margin-top:55vh;text-align:center}
+  .about{grid-template-columns:1fr}
+  .modal-content{grid-template-columns:1fr}
+}
+
 </style>
 </head>
+
 <body>
 
-<nav>
-<h2>Naitrika Real Estates</h2>
-<div>
-<a href="#home">Home</a>
-<a href="#gallery">Gallery</a>
-<a href="#contact">Contact</a>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <div class="intro-text">Naitrika Real Estates</div>
 </div>
-</nav>
 
-<section id="home" class="hero">
-<h1>From Land To Luxury Living</h1>
+<header>
+  <h1>Naitrika Constructions</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#properties">Properties</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>From Land To Luxury Living</h2>
+    <p>Premium properties crafted with trust & elegance.</p>
+  </div>
 </section>
 
-<section id="gallery">
-<h2>Gallery</h2>
-<div class="gallery">
+<section id="about" class="about">
+  <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200">
+  <div>
+    <h2>About Us</h2>
+    <p>We specialize in luxury villas, apartments and premium real estate developments with modern architecture and trusted service.</p>
+  </div>
+</section>
 
-<!-- PROPERTY ITEM -->
-<div class="g-box" onclick="openModal(this)">
-<img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200">
-<div class="g-desc">
-<strong>Luxury Villa</strong><br>
-₹2.5 Cr • 4 BHK • 3200 sq.ft
-</div>
-</div>
+<section id="properties">
+  <h2 style="margin-bottom:30px">Properties</h2>
 
-<div class="g-box" onclick="openModal(this)">
-<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200">
-<div class="g-desc">
-<strong>Modern Apartment</strong><br>
-₹1.2 Cr • 3 BHK • 1800 sq.ft
-</div>
-</div>
+  <div class="grid">
 
-<div class="g-box" onclick="openModal(this)">
-<img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200">
-<div class="g-desc">
-<strong>Beach House</strong><br>
-₹3 Cr • 5 BHK • 4000 sq.ft
-</div>
-</div>
+    <!-- PROPERTY -->
+    <div class="card" onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200">
+      <div class="info">
+        <h3>Luxury Villa</h3>
+        <p>₹2.5 Cr • 4 BHK • 3200 sq.ft</p>
+      </div>
+    </div>
 
-<!-- COPY ABOVE BLOCK TO ADD MORE -->
+    <div class="card" onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200">
+      <div class="info">
+        <h3>Modern Apartment</h3>
+        <p>₹1.2 Cr • 3 BHK • 1800 sq.ft</p>
+      </div>
+    </div>
 
-</div>
+  </div>
 </section>
 
 <section id="contact">
-<h2>Contact</h2>
-<button onclick="callNow()">Call</button>
-<button onclick="contactWhatsApp()">WhatsApp</button>
+  <h2>Contact</h2>
+
+  <a class="btn" href="https://wa.me/919999999999">WhatsApp</a>
+  <a class="btn" href="tel:+919999999999">Call</a>
+
 </section>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
-<div class="modal-content">
-<button class="close-btn" onclick="closeModal()">Close ✕</button>
-<img id="modalImg">
-<h3 id="modalTitle"></h3>
-<p id="modalDesc"></p>
-</div>
-</div>
+  <button class="close" onclick="closeModal()">✕</button>
+  <div class="modal-content">
+    <img id="modalImg">
+    <div class="details">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
 
-<footer>© 2026 Naitrika Real Estates</footer>
+      <div class="features">
+        <span>Parking</span>
+        <span>Security</span>
+        <span>Garden</span>
+        <span>Prime Location</span>
+      </div>
+
+      <div class="actions">
+        <button class="whatsapp" onclick="contactWhatsApp()">WhatsApp</button>
+        <button class="call" onclick="callNow()">Call</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-let phone="+919999999999";
 
-function openModal(el){
-let img=el.querySelector('img').src;
-let title=el.querySelector('strong').innerText;
-let desc=el.querySelector('.g-desc').innerText;
-
-document.getElementById('modal').style.display='flex';
-document.getElementById('modalImg').src=img;
-document.getElementById('modalTitle').innerText=title;
-document.getElementById('modalDesc').innerText=desc;
+/* INTRO */
+window.onload=()=>{
+  setTimeout(()=>document.getElementById("intro").classList.add("hide"),1500);
 }
 
-function closeModal(){document.getElementById('modal').style.display='none'}
-function callNow(){window.location.href=`tel:${phone}`}
-function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
+let phone="+919999999999";
 
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+/* MODAL */
+function openModal(el){
+  modal.style.display="flex";
+  modalImg.src=el.querySelector("img").src;
+  modalTitle.innerText=el.querySelector("h3").innerText;
+  modalDesc.innerText=el.querySelector("p").innerText;
+}
+function closeModal(){modal.style.display="none"}
+function contactWhatsApp(){window.open(`https://wa.me/${phone}`)}
+function callNow(){window.location.href=`tel:${phone}`}
+
+modal.onclick=(e)=>{if(e.target===modal)closeModal()}
+
 </script>
 
 </body>
