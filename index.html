@@ -12,7 +12,11 @@
   --bg:#0a0a0a;
   --text:#fff;
   --glass:rgba(255,255,255,0.06);
-  --accent:#d4af37;
+  --gold:#d4af37;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -20,7 +24,6 @@ body{
   font-family:'Inter',sans-serif;
   background: radial-gradient(circle at top,#111,#000);
   color:var(--text);
-  overflow-x:hidden;
 }
 
 /* INTRO */
@@ -40,7 +43,7 @@ body{
 .house{
   width:60px;
   height:60px;
-  border:2px solid var(--accent);
+  border:2px solid var(--gold);
   transform:rotate(45deg);
   margin-bottom:20px;
   animation:float 2s infinite ease-in-out;
@@ -48,11 +51,11 @@ body{
 
 #intro h1{
   font-family:'Playfair Display',serif;
+  color:var(--gold);
   letter-spacing:3px;
 }
 
 @keyframes float{
-  0%,100%{transform:translateY(0) rotate(45deg);}
   50%{transform:translateY(-15px) rotate(45deg);}
 }
 
@@ -68,52 +71,71 @@ nav{
   position:sticky;
   top:0;
   backdrop-filter:blur(20px);
-  background:rgba(0,0,0,0.3);
+  background:rgba(0,0,0,0.4);
+  z-index:1000;
 }
 
 .logo{
-  font-family:'Playfair Display',serif;
-  font-size:26px;
-  letter-spacing:2px;
-}
-
-.nav-btns a{
-  margin-left:15px;
-  text-decoration:none;
-  color:#000;
-  background:var(--accent);
-  padding:8px 16px;
-  border-radius:20px;
-  font-size:14px;
-}
-
-/* HERO */
-.hero{
-  height:90vh;
   display:flex;
   align-items:center;
-  justify-content:center;
+  gap:10px;
+  font-family:'Playfair Display',serif;
+  color:var(--gold);
+  font-size:24px;
+}
+
+.logo-box{
+  width:25px;
+  height:25px;
+  border:2px solid var(--gold);
+  transform:rotate(45deg);
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+  gap:25px;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  transition:0.3s;
+}
+
+nav ul li a:hover{
+  color:var(--gold);
+}
+
+/* SECTIONS */
+section{
+  padding:80px 60px;
   text-align:center;
 }
 
-.hero h1{
+h1,h2{
   font-family:'Playfair Display',serif;
-  font-size:64px;
-  letter-spacing:2px;
 }
 
-.hero span{
-  display:block;
-  font-size:18px;
-  margin-top:10px;
+/* HERO */
+.hero h1{
+  font-size:60px;
+  color:var(--gold);
+}
+
+.hero p{
   opacity:0.7;
 }
 
-/* GALLERY */
-.gallery{
-  padding:60px;
+/* ABOUT */
+.about{
+  max-width:800px;
+  margin:auto;
+  opacity:0.8;
 }
 
+/* GALLERY */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -129,19 +151,13 @@ nav{
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.03);
-  box-shadow:0 20px 50px rgba(0,0,0,0.7);
+  transform:translateY(-10px);
 }
 
 .card img{
   width:100%;
   height:220px;
   object-fit:cover;
-  transition:0.5s;
-}
-
-.card:hover img{
-  transform:scale(1.1);
 }
 
 .info{
@@ -149,54 +165,30 @@ nav{
 }
 
 .dimension{
-  color:var(--accent);
-  font-size:14px;
+  color:var(--gold);
 }
 
-.desc{
-  font-size:14px;
-  opacity:0.8;
-}
-
-/* SOCIAL FOOTER */
-.social{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:30px;
-}
-
-.social a{
-  text-decoration:none;
-  font-size:20px;
+/* CONTACT */
+.contact-box{
+  max-width:500px;
+  margin:auto;
   background:var(--glass);
-  padding:12px;
-  border-radius:50%;
-  backdrop-filter:blur(10px);
-  transition:0.3s;
+  padding:30px;
+  border-radius:20px;
 }
 
-.social a:hover{
-  background:var(--accent);
-  color:#000;
-}
-
-/* FLOAT BTN */
-.float{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  background:var(--accent);
-  padding:15px 20px;
-  border-radius:50px;
-  cursor:pointer;
+.contact-box a{
+  display:block;
+  margin:10px 0;
+  color:var(--gold);
+  text-decoration:none;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
+  padding:20px;
   opacity:0.5;
-  padding-bottom:20px;
 }
 
 </style>
@@ -212,38 +204,50 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <div class="logo">NAITRIKA</div>
-  <div class="nav-btns">
-    <a href="tel:+919999999999">Call</a>
-    <a href="https://wa.me/919999999999">WhatsApp</a>
+  <div class="logo">
+    <div class="logo-box"></div>
+    NAITRIKA
   </div>
+
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <h1>Naitrika Real Estates</h1>
-    <span>From Land To Luxury Living</span>
-  </div>
+<!-- HOME -->
+<section id="home" class="hero">
+  <h1>Naitrika Real Estates</h1>
+  <p>From Land To Luxury Living</p>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery">
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <p class="about">
+    Naitrika Real Estates specializes in premium plots, villas, and luxury living spaces.
+    We deliver high-value properties with modern infrastructure and future growth potential.
+  </p>
+</section>
+
+<!-- PROPERTIES -->
+<section id="properties">
+  <h2>Featured Properties</h2>
   <div class="grid" id="grid"></div>
 </section>
 
-<!-- FLOAT BUTTON -->
-<div class="float" onclick="window.open('https://wa.me/919999999999')">
-  Contact
-</div>
-
-<!-- SOCIAL -->
-<div class="social">
-  <a href="#">📷</a>
-  <a href="#">💬</a>
-  <a href="#">📞</a>
-  <a href="#">✉️</a>
-</div>
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <div class="contact-box">
+    <a href="tel:+919999999999">📞 Call: +91 99999 99999</a>
+    <a href="https://wa.me/919999999999">💬 WhatsApp</a>
+    <a href="mailto:info@naitrika.com">✉️ info@naitrika.com</a>
+    <a href="#">📷 Instagram</a>
+  </div>
+</section>
 
 <footer>
   © 2026 Naitrika Real Estates
@@ -260,8 +264,8 @@ for(let i=1;i<=20;i++){
     <img src="https://picsum.photos/500/300?random=${i}">
     <div class="info">
       <div class="dimension">${1200+i*50} sq.ft</div>
-      <div class="desc">
-        Premium luxury property located in a high-growth area with modern infrastructure.
+      <div>
+        Premium luxury property in a fast-growing location.
       </div>
     </div>
   `;
