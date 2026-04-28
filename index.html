@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxury Estates</title>
+<title>Naitrika Real Estates</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{background:#0a0a0a;color:#fff;overflow-x:hidden}
 
-/* Glass Navbar */
 nav{
 position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;
 padding:15px 40px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);
@@ -20,17 +19,15 @@ nav ul{display:flex;gap:25px;list-style:none}
 nav ul li{cursor:pointer;transition:.3s}
 nav ul li:hover{color:#aaa}
 
-/* Hero */
 .hero{
 height:100vh;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') center/cover;
-display:flex;align-items:center;justify-content:center;text-align:center;
+display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column
 }
 .hero h2{font-size:48px;background:rgba(0,0,0,0.4);padding:20px 40px;border-radius:20px}
+.hero p{margin-top:10px;font-size:20px;color:#ccc}
 
-/* Sections */
 section{padding:100px 40px}
 
-/* Glass Cards */
 .grid{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px
 }
@@ -47,7 +44,6 @@ margin-top:10px;padding:10px 15px;border:none;border-radius:10px;
 background:#fff;color:#000;cursor:pointer;font-weight:600
 }
 
-/* Modal */
 .modal{
 position:fixed;top:0;left:0;width:100%;height:100%;
 display:none;align-items:center;justify-content:center;
@@ -64,14 +60,16 @@ padding:20px;border-radius:20px;max-width:600px;width:90%;text-align:center
 .whatsapp{background:#25D366;color:#fff}
 .call{background:#007BFF;color:#fff}
 
-/* Footer */
+.contact-buttons{margin-top:20px}
+.contact-buttons button{margin:10px;padding:12px 25px;border:none;border-radius:10px;font-size:16px;cursor:pointer}
+
 footer{text-align:center;padding:40px;background:#000;color:#aaa}
 </style>
 </head>
 <body>
 
 <nav>
-<h1>Luxury Estates</h1>
+<h1>Naitrika Real Estates</h1>
 <ul>
 <li>HOME</li>
 <li>ABOUT</li>
@@ -82,45 +80,66 @@ footer{text-align:center;padding:40px;background:#000;color:#aaa}
 
 <div class="hero">
 <h2>Find Your Dream Property</h2>
+<p>From Land To Luxury Living</p>
 </div>
 
 <section id="about">
 <h2>About Us</h2>
-<p>We offer premium real estate properties with luxury experience and modern design.</p>
+<p>We deliver premium real estate experiences with luxury properties, modern architecture, and trusted service.</p>
 </section>
 
 <section id="properties">
 <h2>Properties</h2>
 <div class="grid">
 
-<!-- Property Card -->
-<div class="card">
-<img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994">
-<div class="content">
-<h3>Modern Villa</h3>
-<p>₹2.5 Crore • 4 BHK</p>
-<button onclick="openModal(this)">View</button>
-</div>
-</div>
+<script>
+const properties = [
+  {img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994',title:'Modern Villa',desc:'₹2.5 Cr • 4 BHK • 3200 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d',title:'Luxury Apartment',desc:'₹1.2 Cr • 3 BHK • 1800 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1570129477492-45c003edd2be',title:'Beach House',desc:'₹3.1 Cr • 5 BHK • 4000 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914',title:'Urban Flat',desc:'₹90L • 2 BHK • 1200 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6',title:'Penthouse',desc:'₹4 Cr • 4 BHK • 3500 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750',title:'Classic Home',desc:'₹1.8 Cr • 3 BHK • 2100 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1507089947368-19c1da9775ae',title:'Luxury Mansion',desc:'₹8 Cr • 6 BHK • 6000 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267',title:'City Apartment',desc:'₹75L • 2 BHK • 1100 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1484154218962-a197022b5858',title:'Studio Flat',desc:'₹45L • 1 BHK • 700 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde',title:'Garden Villa',desc:'₹2.9 Cr • 4 BHK • 3000 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600585152915-d208bec867a1',title:'Duplex House',desc:'₹2.2 Cr • 4 BHK • 2800 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1576941089067-2de3c901e126',title:'Farm House',desc:'₹3.5 Cr • 5 BHK • 5000 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600607687644-c7171b42498b',title:'Luxury Condo',desc:'₹1.5 Cr • 3 BHK • 1900 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688',title:'Modern Loft',desc:'₹1.1 Cr • 2 BHK • 1400 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1599423300746-b62533397364',title:'Townhouse',desc:'₹1.7 Cr • 3 BHK • 2200 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600585154526-990dced4db0d',title:'Luxury Villa Pro',desc:'₹3.2 Cr • 4 BHK • 3600 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600566752355-35792bedcfea',title:'Smart Home',desc:'₹2 Cr • 3 BHK • 2000 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1505691938895-1758d7feb511',title:'Elegant House',desc:'₹2.4 Cr • 4 BHK • 2700 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0',title:'Compact Flat',desc:'₹60L • 2 BHK • 1000 sq.ft'},
+  {img:'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c',title:'Skyline Penthouse',desc:'₹5 Cr • 5 BHK • 4200 sq.ft'}
+];
 
+document.write(properties.map(p => `
 <div class="card">
-<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d">
+<img src="${p.img}">
 <div class="content">
-<h3>Luxury Apartment</h3>
-<p>₹1.2 Crore • 3 BHK</p>
+<h3>${p.title}</h3>
+<p>${p.desc}</p>
 <button onclick="openModal(this)">View</button>
 </div>
 </div>
+`).join(''));
+</script>
 
 </div>
 </section>
 
 <section id="contact">
 <h2>Contact</h2>
-<p>Call or WhatsApp us for more details.</p>
+<p>Reach us instantly via call or WhatsApp</p>
+<div class="contact-buttons">
+<button class="whatsapp" onclick="contactWhatsApp()">WhatsApp</button>
+<button class="call" onclick="callNow()">Call</button>
+</div>
 </section>
 
-<!-- Modal -->
 <div class="modal" id="modal">
 <div class="modal-content">
 <img id="modalImg">
@@ -133,7 +152,7 @@ footer{text-align:center;padding:40px;background:#000;color:#aaa}
 </div>
 
 <footer>
-<p>© 2026 Luxury Estates. All rights reserved.</p>
+<p>© 2026 Naitrika Real Estates. All rights reserved.</p>
 </footer>
 
 <script>
