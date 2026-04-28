@@ -9,12 +9,13 @@
 
 <style>
 :root{
-  --bg:#0a0a0a;
+  --bg:#0a0a0a;   /* DARK DEFAULT */
   --text:#fff;
   --glass:rgba(255,255,255,0.06);
   --gold:#d4af37;
 }
 
+/* LIGHT MODE */
 .light{
   --bg:#f5f5f5;
   --text:#111;
@@ -29,18 +30,54 @@ body{
   transition:0.4s;
 }
 
+/* INTRO */
+#intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  animation:fadeOut 0.8s ease 1.3s forwards;
+}
+
+#intro h1{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  background:linear-gradient(90deg,#d4af37,#fff,#d4af37);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 1.3s linear infinite;
+}
+
+@keyframes shine{
+  0%{background-position:-200%;}
+  100%{background-position:200%;}
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
+}
+
 /* NAV */
 nav{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:15px 30px;
   backdrop-filter:blur(20px);
   background:var(--glass);
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
 .logo{
   font-family:'Playfair Display',serif;
   color:var(--gold);
+  font-size:20px;
 }
 
 nav ul{
@@ -50,57 +87,94 @@ nav ul{
   align-items:center;
 }
 
-.switch{
-  width:50px;height:25px;
-  background:#333;border-radius:50px;
-  cursor:pointer;position:relative;
+nav a{
+  text-decoration:none;
+  color:var(--text);
 }
-.switch::before{
-  content:'';position:absolute;
-  width:20px;height:20px;
-  background:#fff;border-radius:50%;
-  top:2.5px;left:3px;
+
+nav a:hover{color:var(--gold);}
+
+/* TOGGLE SWITCH */
+.switch{
+  position:relative;
+  width:50px;
+  height:25px;
+}
+
+.switch input{
+  display:none;
+}
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  background:#555;
+  border-radius:50px;
   transition:0.3s;
 }
-.light .switch{background:#ddd;}
-.light .switch::before{transform:translateX(24px);background:#000;}
 
-section{padding:60px 20px;text-align:center;}
+.slider:before{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  left:4px;
+  top:3px;
+  background:white;
+  border-radius:50%;
+  transition:0.3s;
+}
+
+input:checked + .slider{
+  background:var(--gold);
+}
+
+input:checked + .slider:before{
+  transform:translateX(24px);
+}
+
+/* SECTIONS */
+section{
+  padding:60px 20px;
+  text-align:center;
+}
 
 .hero h1{
-  font-size:50px;
+  font-size:56px;
   color:var(--gold);
+}
+
+.hero p{
+  font-size:22px;
 }
 
 /* GLASS */
 .glass{
   background:var(--glass);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(25px);
   border-radius:20px;
   border:1px solid rgba(255,255,255,0.1);
 }
 
-/* FORM */
-.form{
-  max-width:500px;
+/* ABOUT */
+.about-card{
+  max-width:700px;
   margin:auto;
-  padding:20px;
+  padding:30px;
 }
 
-.form input,.form textarea{
-  width:100%;
-  margin:10px 0;
-  padding:10px;
-  border:none;
-  border-radius:10px;
+/* SERVICES */
+.services{
+  max-width:900px;
+  margin:auto;
+  padding:30px;
 }
 
-.form button{
-  background:var(--gold);
-  border:none;
-  padding:10px;
-  border-radius:10px;
-  cursor:pointer;
+.services ul{
+  list-style:none;
+  padding:0;
+  line-height:2;
 }
 
 /* GRID */
@@ -113,6 +187,11 @@ section{padding:60px 20px;text-align:center;}
 .card{
   overflow:hidden;
   cursor:pointer;
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
 }
 
 .card img{
@@ -121,7 +200,7 @@ section{padding:60px 20px;text-align:center;}
   object-fit:cover;
 }
 
-.info{padding:10px;}
+.info{padding:12px;}
 .dimension{color:var(--gold);}
 
 /* MODAL */
@@ -135,13 +214,13 @@ section{padding:60px 20px;text-align:center;}
 }
 
 .modal-box{
+  position:relative;
   background:#fff;
   color:#000;
   width:90%;
   max-width:500px;
   border-radius:15px;
   overflow:hidden;
-  position:relative;
 }
 
 .modal-box img{
@@ -162,53 +241,116 @@ section{padding:60px 20px;text-align:center;}
   border-radius:50%;
   cursor:pointer;
 }
+
+/* CONTACT */
+.contact-box{
+  max-width:400px;
+  margin:auto;
+  padding:25px;
+}
+
+.contact-box a{
+  display:block;
+  margin:10px;
+  color:var(--gold);
+  text-decoration:none;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  opacity:0.6;
+}
 </style>
 </head>
 
 <body>
 
+<!-- INTRO -->
+<div id="intro">
+  <h1>Naitrika Real Estates</h1>
+</div>
+
+<!-- NAV -->
 <nav>
   <div class="logo">NAITRIKA</div>
+
   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#upload">Upload</a></li>
-    <li><a href="#gallery">Properties</a></li>
-    <li><div class="switch" onclick="toggleTheme()"></div></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#contact">Contact</a></li>
+
+    <!-- TOGGLE -->
+    <li>
+      <label class="switch">
+        <input type="checkbox" onclick="toggleTheme()">
+        <span class="slider"></span>
+      </label>
+    </li>
   </ul>
 </nav>
 
-<section class="hero">
+<!-- HERO -->
+<section id="home" class="hero">
   <h1>Naitrika Real Estates</h1>
   <p>From Land To Luxury Living</p>
 </section>
 
-<!-- UPLOAD FORM -->
-<section id="upload">
-  <h2>Add Property</h2>
-  <div class="form glass">
-    <input type="file" id="image">
-    <input type="text" id="title" placeholder="Property Title">
-    <input type="text" id="size" placeholder="Sq.ft">
-    <textarea id="desc" placeholder="Description"></textarea>
-    <button onclick="addProperty()">Upload Property</button>
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <div class="about-card glass">
+    <p>
+      Naitrika Real Estates specializes in premium plots, villas, and luxury developments.
+      We focus on high-growth locations and long-term investment value.
+    </p>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery">
+<!-- PROPERTIES -->
+<section id="properties">
   <h2>Properties</h2>
   <div class="grid" id="grid"></div>
 </section>
 
+<!-- SERVICES -->
+<section>
+  <h2>Our Services</h2>
+  <div class="services glass">
+    <ul>
+      <li>✔️ All Constructions</li>
+      <li>✔️ Interior Works</li>
+      <li>✔️ Painting Works</li>
+      <li>✔️ Plumbing Works</li>
+      <li>✔️ Electrical Works</li>
+      <li>✔️ Cupboard Works</li>
+      <li>✔️ CCTV Camera Installation</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-box glass">
+    <a href="tel:+919999999999">📞 Call</a>
+    <a href="https://wa.me/919999999999">💬 WhatsApp</a>
+    <a href="mailto:info@naitrika.com">✉️ Email</a>
+  </div>
+</section>
+
+<footer>© 2026 Naitrika Real Estates</footer>
+
 <!-- MODAL -->
 <div id="modal">
-  <div class="modal-box" id="modalBox">
+  <div class="modal-box">
     <span class="close" onclick="closeModal()">✖</span>
     <img id="modalImg">
     <div class="modal-content">
-      <h2 id="mTitle"></h2>
-      <p id="mSize"></p>
-      <p id="mDesc"></p>
+      <h2 id="title"></h2>
+      <p id="size"></p>
+      <p id="desc"></p>
     </div>
   </div>
 </div>
@@ -218,54 +360,46 @@ function toggleTheme(){
   document.body.classList.toggle("light");
 }
 
+/* 👉 ADD YOUR IMAGES HERE */
+const properties = [
+  {img:"images/p1.jpg", size:"1200 sq.ft", desc:"Premium plot"},
+  {img:"images/p2.jpg", size:"1500 sq.ft", desc:"Luxury villa"},
+  {img:"images/p3.jpg", size:"1800 sq.ft", desc:"Modern house"}
+];
+
 const grid=document.getElementById("grid");
-const modal=document.getElementById("modal");
 
-function addProperty(){
-  const file=document.getElementById("image").files[0];
-  const title=document.getElementById("title").value;
-  const size=document.getElementById("size").value;
-  const desc=document.getElementById("desc").value;
+properties.forEach((p,i)=>{
+  const card=document.createElement("div");
+  card.className="card glass";
 
-  if(!file) return alert("Upload image");
+  card.innerHTML=`
+    <img src="${p.img}">
+    <div class="info">
+      <div class="dimension">${p.size}</div>
+      <div>${p.desc}</div>
+    </div>
+  `;
 
-  const reader=new FileReader();
-  reader.onload=function(e){
+  card.onclick=()=>openModal(p,i+1);
+  grid.appendChild(card);
+});
 
-    const card=document.createElement("div");
-    card.className="card glass";
-
-    card.innerHTML=`
-      <img src="${e.target.result}">
-      <div class="info">
-        <div class="dimension">${size} sq.ft</div>
-        <div>${title}</div>
-      </div>
-    `;
-
-    card.onclick=()=>{
-      document.getElementById("modalImg").src=e.target.result;
-      document.getElementById("mTitle").innerText=title;
-      document.getElementById("mSize").innerText=size+" sq.ft";
-      document.getElementById("mDesc").innerText=desc;
-      modal.style.display="flex";
-    };
-
-    grid.appendChild(card);
-  };
-
-  reader.readAsDataURL(file);
+function openModal(p,id){
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("modalImg").src=p.img;
+  document.getElementById("title").innerText="Property #"+id;
+  document.getElementById("size").innerText=p.size;
+  document.getElementById("desc").innerText=p.desc;
 }
 
 function closeModal(){
-  modal.style.display="none";
+  document.getElementById("modal").style.display="none";
 }
 
-/* click outside */
-modal.addEventListener("click",(e)=>{
-  if(e.target===modal){
-    closeModal();
-  }
+/* CLICK OUTSIDE CLOSE */
+document.getElementById("modal").addEventListener("click",(e)=>{
+  if(e.target.id==="modal") closeModal();
 });
 </script>
 
