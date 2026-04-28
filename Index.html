@@ -32,6 +32,7 @@ body{
   background: var(--bg);
   color: var(--text);
   transition:0.4s;
+  scroll-behavior:smooth;
 }
 
 /* NAVBAR */
@@ -42,6 +43,7 @@ nav{
   backdrop-filter: blur(20px);
   position:sticky;
   top:0;
+  z-index:1000;
 }
 
 .logo{
@@ -66,11 +68,13 @@ nav{
 .hero h1{
   font-size:60px;
   font-weight:600;
+  animation:fadeUp 1.2s ease;
 }
 
 .hero p{
   margin-top:10px;
   opacity:0.7;
+  animation:fadeUp 1.6s ease;
 }
 
 .btn{
@@ -81,6 +85,13 @@ nav{
   color:#000;
   cursor:pointer;
   border-radius:30px;
+  transition:0.3s;
+  animation:fadeUp 2s ease;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px var(--accent);
 }
 
 /* GALLERY */
@@ -105,16 +116,29 @@ nav{
   border-radius:20px;
   overflow:hidden;
   transition:0.4s;
+  opacity:0;
+  transform:translateY(40px);
+}
+
+.card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
 .card img{
   width:100%;
   height:220px;
   object-fit:cover;
+  transition:0.5s;
+}
+
+.card:hover img{
+  transform:scale(1.1);
 }
 
 .info{
@@ -132,11 +156,43 @@ nav{
   opacity:0.8;
 }
 
+/* CONTACT FLOAT BUTTON */
+.contact-btn{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:var(--accent);
+  color:#000;
+  padding:15px 20px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 5px 25px rgba(0,0,0,0.4);
+  transition:0.3s;
+  z-index:1000;
+}
+
+.contact-btn:hover{
+  transform:scale(1.1);
+}
+
 /* FOOTER */
 footer{
   text-align:center;
   padding:30px;
   opacity:0.6;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 </style>
@@ -160,34 +216,13 @@ footer{
 <section class="gallery">
   <h2>Featured Properties</h2>
 
-  <div class="grid">
-
-    <!-- 20 PROPERTY CARDS -->
-
-    <!-- REPEAT BLOCK -->
-    <script>
-      const container = document.currentScript.parentElement;
-
-      for(let i=1;i<=20;i++){
-        const card = document.createElement('div');
-        card.className='card';
-
-        card.innerHTML = `
-          <img src="https://picsum.photos/500/300?random=${i}">
-          <div class="info">
-            <div class="dimension">${1200 + i*50} sq.ft</div>
-            <div class="desc">
-              Premium residential plot with modern surroundings,
-              perfect for luxury living and investment opportunity.
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      }
-    </script>
-
-  </div>
+  <div class="grid" id="grid"></div>
 </section>
+
+<!-- CONTACT BUTTON -->
+<div class="contact-btn" onclick="contactNow()">
+  Contact Us
+</div>
 
 <footer>
   © 2026 Naitrika Real Estate — Luxury Properties
@@ -196,6 +231,44 @@ footer{
 <script>
 function toggleTheme(){
   document.body.classList.toggle("light");
+}
+
+/* CREATE CARDS */
+const grid = document.getElementById("grid");
+
+for(let i=1;i<=20;i++){
+  const card = document.createElement('div');
+  card.className='card';
+
+  card.innerHTML = `
+    <img src="https://picsum.photos/500/300?random=${i}">
+    <div class="info">
+      <div class="dimension">${1200 + i*50} sq.ft</div>
+      <div class="desc">
+        Premium residential property with luxury surroundings and high investment value.
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+}
+
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('scroll', () => {
+  const trigger = window.innerHeight * 0.85;
+
+  cards.forEach(card => {
+    const top = card.getBoundingClientRect().top;
+    if(top < trigger){
+      card.classList.add('show');
+    }
+  });
+});
+
+/* CONTACT BUTTON ACTION */
+function contactNow(){
+  window.open("https://wa.me/919999999999", "_blank");
 }
 </script>
 
